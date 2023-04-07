@@ -5,16 +5,14 @@ import Hero from "./components/Hero"
 
 function App() {
   return (
-    <BrowserRouter>
-      <div>
-        <header>
-          <Hero />
-        </header>
-        <main>
-          <Properties />
-        </main>
-      </div>
-    </BrowserRouter>
+    <div>
+      <header>
+        <Hero />
+      </header>
+      <main>
+        <Properties />
+      </main>
+    </div>
   )
 }
 
