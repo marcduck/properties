@@ -51,29 +51,6 @@ function Properties() {
       .catch(console.error)
   }, [])
 
-  const onBidClick = (post) => {
-    const newPrice = post.price + 1000
-
-    client
-      .patch(post._id)
-      .set({ price: newPrice, highestBidder: bidderId })
-      .commit()
-      .then(() => {
-        setPost((prevData) =>
-          prevData.map((p) =>
-            p._id === post._id
-              ? {
-                  ...p,
-                  price: newPrice,
-                  highestBidder: bidderId,
-                }
-              : p
-          )
-        )
-      })
-      .catch(console.error)
-  }
-
   const lastPostIndex = currentPage * pageSize
   const firstPostIndex = lastPostIndex - pageSize
   const currentPosts = postData.slice(
@@ -103,7 +80,8 @@ function Properties() {
                   <Property
                     post={post}
                     index={index}
-                    onBidClick={onBidClick}
+                    bidderId={bidderId}
+                    setPost={setPost}
                   />
                 </>
               ))}
