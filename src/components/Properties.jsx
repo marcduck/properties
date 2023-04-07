@@ -4,6 +4,7 @@ import { Property } from "./Property"
 import PropertySkeleton from "./PropertySkeleton"
 import { client } from "./sanity"
 import { shuffle } from "../utils"
+import { Link } from "react-router-dom"
 
 function Properties() {
   const [postData, setPost] = useState([])
@@ -83,28 +84,6 @@ function Properties() {
   return (
     <main className="p-6 md:p-12 mb-auto ">
       <section className="container mx-auto">
-        <div
-          className="gap-2 flex flex-col
-          p-6 md:p-12
-        bg-slate-300 "
-        >
-          <h1 className="text-4xl ">Property Listings</h1>
-          <h2 className="text-xl text-slate-600 ">
-            Welcome user {bidderId}
-          </h2>
-          <p>
-            Welcome to our property listings page! Here, you
-            can bid on properties that you like or simply
-            show your appreciation by clicking the "Like"
-            button. To place a bid, just click on the
-            property price. Each bid increases the price by
-            $1000! And don't worry about losing track of
-            your bids - we'll display your unique bidder ID
-            at the top of the page so you can keep track of
-            your bidding activity.
-          </p>
-        </div>
-
         <div className="flex flex-col my-8 gap-8 items-center justify-center">
           {postData && (
             <Pagination
@@ -140,6 +119,9 @@ function Properties() {
           )}
         </div>
       </section>
+      <div className="text-slate-500 text-sm">
+        Bidder ID: {bidderId}
+      </div>
     </main>
   )
 }

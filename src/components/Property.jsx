@@ -68,18 +68,18 @@ export function Property({ post, onBidClick, index }) {
         />
       </a>
       <div className="p-4">
-        <div className="flex items-center justify-between ">
-          <span className="text-xl font-bold text-slate-900 dark:text-white">
+        <div className="flex items-center justify-between">
+          <span className="text-lg font-bold text-slate-900 dark:text-white">
             {cents(post.price)}
           </span>
           <div className="flex gap-4">
             <button
               onClick={() => handleLike(post)}
-              className=""
+              className="flex flex-col items-center justify-center"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-red-500 hover:text-red-600 -mb-1"
+                className="h-6 w-6 text-red-500 hover:text-red-600"
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >
@@ -89,7 +89,7 @@ export function Property({ post, onBidClick, index }) {
                   clipRule="evenodd"
                 />
               </svg>
-              <span className="text-xs font-bold text-slate-800">
+              <span className="text-xs font-semibold text-slate-800">
                 {likes}
               </span>
             </button>
