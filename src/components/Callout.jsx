@@ -17,7 +17,7 @@ export default function Callout({
         }}
         whileTap={{ scale: 0.97 }}
         className="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm 
-          text-blue-700 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300 
+          text-blue-700 bg-blue-200/50 rounded-full dark:bg-blue-900 dark:text-blue-300 
           "
       >
         <span className="text-xs bg-blue-600 rounded-full text-white px-4 py-1.5 mr-3">
@@ -40,7 +40,9 @@ export default function Callout({
             />
           </svg>
           <span className="text-xs md:text-sm font-medium items-center">
-            {text}
+            Personal banking has launched!{" "}
+            <br className="md:hidden" /> Check out your
+            account
           </span>
           <svg
             aria-hidden="true"

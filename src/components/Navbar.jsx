@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Link, NavLink } from "react-router-dom"
 import { appName } from "../utils"
 import Avatar from "boring-avatars"
-import { motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 
 export default function Navbar({ bidderId }) {
   const links = [
@@ -15,12 +15,12 @@ export default function Navbar({ bidderId }) {
       path: "/properties",
     },
     {
-      name: "About",
-      path: "/about",
-    },
-    {
       name: "Bank",
       path: "/bank",
+    },
+    {
+      name: "About",
+      path: "/about",
     },
   ]
   const [isOpen, setIsOpen] = useState(false)
@@ -33,14 +33,30 @@ export default function Navbar({ bidderId }) {
       justify-between mx-auto p-4"
       >
         <Link to={"/"} className="flex items-center">
-          <img
+          <motion.img
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{
+              duration: 0.9,
+              type: "spring",
+              bounce: 0.7,
+            }}
             src="./HomeModern.svg"
             className="h-8 mr-3"
             alt={appName + " Logo"}
           />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+          <motion.span
+            whileDrag={{ scale: 0.98 }}
+            whileHover={{ scale: 1.01 }}
+            transition={{
+              duration: 0.7,
+              type: "spring",
+              bounce: 0.7,
+            }}
+            className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+          >
             {appName}
-          </span>
+          </motion.span>
         </Link>
         {/* User icon */}
         <div className="flex items-center md:order-2">
@@ -88,7 +104,9 @@ export default function Navbar({ bidderId }) {
               </ul>
             </div>
           )}
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => setMenuOpen(!menuOpen)}
             className="inline-flex items-center p-2 mx-1 text-sm text-gray-500 rounded-lg md:hidden 
             hover:bg-gray-100 focus:outline-none focus:ring-2 
@@ -108,16 +126,10 @@ export default function Navbar({ bidderId }) {
                 clipRule="evenodd"
               ></path>
             </svg>
-          </button>
+          </motion.button>
         </div>
         {
-          <motion.div
-            layout
-            animate={{
-              opacity: 1,
-              transition: { duration: 0.5 },
-            }}
-            initial={{}}
+          <div
             className={`${
               !menuOpen && "hidden md:visible"
             } items-center justify-between w-full md:flex md:w-auto md:order-1`}
@@ -138,10 +150,12 @@ export default function Navbar({ bidderId }) {
                     className={({ isActive }) =>
                       `${
                         isActive
-                          ? "bg-blue-700 text-white"
+                          ? "bg-blue-700 hover:bg-blue-800 text-white hover:text-gray-100 hover:md:text-blue-900 md:text-blue-700 md:bg-blue-300/20"
                           : "hover:bg-gray-200/70"
-                      } block py-2 pl-3 pr-4 rounded md:bg-transparent md:text-blue-700 md:p-0 
-                      md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent`
+                      } block py-2 pl-3 pr-4 rounded md:bg-transparent md:text-grey-700 md:p-0 
+                      md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent
+                      md:py-3 md:px-6 md:hover:bg-gray-200/70  
+                      `
                     }
                   >
                     {name}
@@ -149,7 +163,7 @@ export default function Navbar({ bidderId }) {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
         }
       </div>
     </nav>
