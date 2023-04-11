@@ -1,33 +1,18 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useId } from "react"
 import Pagination from "./Pagination"
 import { Property } from "./Property"
-import PropertySkeleton from "./PropertySkeleton"
 import { client } from "./sanity"
 import { shuffle } from "../utils"
 import { Link } from "react-router-dom"
+import { AnimatePresence } from "framer-motion"
+import Banner from "./Banner"
 
-function Properties() {
-  const [postData, setPost] = useState([])
+function Properties({ bidderId }) {
   const [isLoading, setIsLoading] = useState(true)
-  const [bidderId, setBidderId] = useState("")
+  const [postData, setPost] = useState([])
 
   const [currentPage, setCurrentPage] = useState(1)
   const [pageSize, setPageSize] = useState(15)
-
-  // Attempt to load bidderId from local storage
-  useEffect(() => {
-    const bidderIdFromLocalStorage =
-      localStorage.getItem("bidderId")
-
-    if (bidderIdFromLocalStorage) {
-      setBidderId(bidderIdFromLocalStorage)
-    } else {
-      // Generate random three-letter string as bidderId
-      const newBidderId = generateBidderId()
-      setBidderId(newBidderId)
-      localStorage.setItem("bidderId", newBidderId)
-    }
-  }, [])
 
   // Fetch data from Sanity
   useEffect(() => {
@@ -51,6 +36,17 @@ function Properties() {
       .catch(console.error)
   }, [])
 
+  const Skeleton = ({ i }) => {
+    return (
+      <div
+        className="w-full h-min max-w-md 
+      bg-white border border-gray-200 
+      rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 
+      mb-4 break-inside-avoid-column"
+      ></div>
+    )
+  }
+
   const lastPostIndex = currentPage * pageSize
   const firstPostIndex = lastPostIndex - pageSize
   const currentPosts = postData.slice(
@@ -59,9 +55,10 @@ function Properties() {
   )
 
   return (
-    <main className="p-6 md:p-12 mb-auto ">
-      <section className="container mx-auto">
-        <div className="flex flex-col my-8 gap-8 items-center justify-center">
+    <main className="">
+      {/* <Banner /> */}
+      <section className="container max-w-screen-xl mx-auto my-8">
+        <div className="flex flex-col gap-8 items-center justify-center">
           {postData && (
             <Pagination
               totalPosts={postData.length || 3 * pageSize}
@@ -71,20 +68,29 @@ function Properties() {
             />
           )}
           <div className="columns-1 md:columns-2 lg:columns-3">
-            {isLoading && (
-              <PropertySkeleton count={pageSize} />
-            )}
-            {!isLoading &&
-              currentPosts.map((post, index) => (
+            <AnimatePresence
+              initial={false}
+              mode="popLayout"
+            >
+              {/* {isLoading && (
                 <>
-                  <Property
-                    post={post}
-                    index={index}
-                    bidderId={bidderId}
-                    setPost={setPost}
-                  />
+                  {[...Array(pageSize)].map((_, i) => (
+                    <Skeleton i={i} key={i} />
+                  ))}
                 </>
-              ))}
+              )} */}
+              {currentPosts.length &&
+                currentPosts.map((post, index) => (
+                  <React.Fragment key={post._id}>
+                    <Property
+                      post={post}
+                      index={index}
+                      bidderId={bidderId}
+                      setPost={setPost}
+                    />
+                  </React.Fragment>
+                ))}
+            </AnimatePresence>
           </div>
           {postData && (
             <Pagination

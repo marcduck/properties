@@ -1,5 +1,6 @@
 import { getImageDimensions } from "@sanity/asset-utils"
 import { urlFor } from "./components/sanity"
+export const appName = "HomeFinder"
 
 export function urlForImg(source, width) {
   return urlFor(source).fit("max").auto("format").url()
@@ -19,6 +20,10 @@ export const SampleImageComponent = ({ value }) => {
       }}
     />
   )
+}
+
+export function censorId(id = "000") {
+  return `${id[0]}••`
 }
 
 export function shuffle(array) {
