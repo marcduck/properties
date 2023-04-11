@@ -103,9 +103,6 @@ function Properties({ bidderId }) {
           )}
         </div>
       </section>
-      <div className="text-slate-500 text-sm">
-        Bidder ID: {bidderId}
-      </div>
     </main>
   )
 }

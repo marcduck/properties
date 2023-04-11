@@ -1,7 +1,9 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link, NavLink } from "react-router-dom"
 import { appName } from "../utils"
 import Avatar from "boring-avatars"
+import { motion } from "framer-motion"
+
 export default function Navbar({ bidderId }) {
   const links = [
     {
@@ -21,6 +23,8 @@ export default function Navbar({ bidderId }) {
       path: "/bank",
     },
   ]
+  const [isOpen, setIsOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 shadow-2xl shadow-slate-400/30">
@@ -30,9 +34,9 @@ export default function Navbar({ bidderId }) {
       >
         <Link to={"/"} className="flex items-center">
           <img
-            src="https://flowbite.com/docs/images/logo.svg"
+            src="./HomeModern.svg"
             className="h-8 mr-3"
-            alt="Flowbite Logo"
+            alt={appName + " Logo"}
           />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             {appName}
@@ -42,12 +46,11 @@ export default function Navbar({ bidderId }) {
         <div className="flex items-center md:order-2">
           <button
             type="button"
-            className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 
+            className="flex mr-3 text-sm bg-gray-800 relative rounded-full md:mr-0 
             focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-            id="user-menu-button"
+            onMouseEnter={() => setIsOpen(true)}
+            onMouseLeave={() => setIsOpen(false)}
             aria-expanded="false"
-            data-dropdown-toggle="user-dropdown"
-            data-dropdown-placement="bottom"
           >
             <span className="sr-only">Open user menu</span>
             <Avatar
@@ -56,62 +59,40 @@ export default function Navbar({ bidderId }) {
               variant="beam"
             />
           </button>
-          <div
-            className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
-            id="user-dropdown"
-          >
-            <div className="px-4 py-3">
-              <span className="block text-sm text-gray-900 dark:text-white">
-                Bonnie Green
-              </span>
-              <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-                name@flowbite.com
-              </span>
-            </div>
-            <ul
-              className="py-2"
-              aria-labelledby="user-menu-button"
+          {isOpen && (
+            <div
+              className="z-50 my-4 text-base list-none bg-white divide-y absolute right-10 top-10
+              divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+              id="user-dropdown"
             >
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Dashboard
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Settings
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Earnings
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Sign out
-                </a>
-              </li>
-            </ul>
-          </div>
+              <div className="px-4 py-3">
+                <span className="block text-sm text-gray-900 dark:text-white">
+                  Bidder ID: {bidderId}
+                </span>
+                <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
+                  {bidderId}@homefinder
+                </span>
+              </div>
+              <ul
+                className="py-2"
+                aria-labelledby="user-menu-button"
+              >
+                <li>
+                  <button
+                    disabled
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >
+                    Dashboard
+                  </button>
+                </li>
+              </ul>
+            </div>
+          )}
           <button
-            data-collapse-toggle="mobile-menu-2"
-            type="button"
-            className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-            aria-controls="mobile-menu-2"
-            aria-expanded="false"
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="inline-flex items-center p-2 mx-1 text-sm text-gray-500 rounded-lg md:hidden 
+            hover:bg-gray-100 focus:outline-none focus:ring-2 
+            focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
           >
             <span className="sr-only">Open main menu</span>
             <svg
@@ -129,25 +110,47 @@ export default function Navbar({ bidderId }) {
             </svg>
           </button>
         </div>
-        <div
-          className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
-          id="mobile-menu-2"
-        >
-          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            {links.map(({ name, path }) => (
-              <li key={name}>
-                <NavLink
-                  to={path}
-                  className={({ isActive }) =>
-                    isActive ? "text-blue-900" : undefined
-                  }
-                >
-                  {name}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {
+          <motion.div
+            layout
+            animate={{
+              opacity: 1,
+              transition: { duration: 0.5 },
+            }}
+            initial={{}}
+            className={`${
+              !menuOpen && "hidden md:visible"
+            } items-center justify-between w-full md:flex md:w-auto md:order-1`}
+            id="mobile-menu-2"
+          >
+            <ul
+              className="
+          flex flex-col font-medium p-4 md:p-0 mt-4 border 
+          border-gray-100 rounded-lg bg-gray-50 md:flex-row 
+          md:space-x-8 md:mt-0 md:border-0 
+          md:bg-white dark:bg-gray-800 gap-2
+          md:dark:bg-gray-900 dark:border-gray-700"
+            >
+              {links.map(({ name, path }) => (
+                <li key={name}>
+                  <NavLink
+                    to={path}
+                    className={({ isActive }) =>
+                      `${
+                        isActive
+                          ? "bg-blue-700 text-white"
+                          : "hover:bg-gray-200/70"
+                      } block py-2 pl-3 pr-4 rounded md:bg-transparent md:text-blue-700 md:p-0 
+                      md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent`
+                    }
+                  >
+                    {name}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        }
       </div>
     </nav>
   )

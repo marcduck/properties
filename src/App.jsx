@@ -33,7 +33,15 @@ function App() {
       <Navbar bidderId={bidderId} />
       <main className="min-h-full">
         <Routes>
-          <Route path="/" element={<Hero />} />
+          <Route
+            path="/"
+            element={
+              <>
+                <Hero />
+                <Properties bidderId={bidderId} />
+              </>
+            }
+          />
           <Route
             path="/properties"
             element={<Properties bidderId={bidderId} />}
