@@ -5,7 +5,12 @@ import {
   // useAnimation,
   useInView,
 } from "framer-motion"
-import { urlForImg, cents, censorId } from "../utils"
+import {
+  urlForImg,
+  cents,
+  censorId,
+  randInt,
+} from "../utils"
 import { client } from "./sanity"
 
 export function Property({
@@ -91,14 +96,14 @@ export function Property({
         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 
               focus:outline-none focus:ring-blue-300 font-medium rounded-lg 
               text-sm px-2 py-2.5 min-w-[19ch] text-center dark:bg-blue-600 
-              dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              dark:hover:bg-blue-700 dark:focus:ring-blue-800 "
       >
         {isProcessing ? (
           <div className="inline-flex items-center">
             <svg
+              className="inline w-3.5 h-3.5 mr-3 text-white animate-spin"
               aria-hidden="true"
               role="status"
-              className="inline w-4 h-4 mr-3 text-white animate-spin"
               viewBox="0 0 100 101"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -126,12 +131,21 @@ export function Property({
       ref={ref}
       id={post._id}
       initial={{ opacity: 0 }}
-      animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+      animate={
+        isInView
+          ? { opacity: 1 }
+          : { opacity: 0, x: randInt(-50, 50) }
+      }
+      transition={{
+        duration: 0.6,
+        type: "spring",
+        damping: randInt(10, 20),
+      }}
       exit={{ opacity: 0 }}
       className="w-full h-min max-w-md 
       bg-white border border-gray-200 
       rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 
-      mb-4 break-inside-avoid-column"
+      mb-4 break-inside-avoid-column "
     >
       <>
         <a href={urlForImg(post.image)} target="_blank">

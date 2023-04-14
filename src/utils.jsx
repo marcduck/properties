@@ -22,6 +22,9 @@ export const SampleImageComponent = ({ value }) => {
   )
 }
 
+export const randInt = (min = 0, max = 10) =>
+  Math.floor(Math.random() * (max - min)) + min
+
 export function censorId(id = "000") {
   return `${id[0]}••`
 }

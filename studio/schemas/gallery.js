@@ -42,6 +42,6 @@ export default defineType({
   initialValue: {
     likes: 0,
     bidCount: 0,
-    price: 100000,
+    price: 1000,
   },
 })

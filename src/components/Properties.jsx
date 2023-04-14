@@ -57,7 +57,7 @@ function Properties({ bidderId }) {
   return (
     <main className="">
       {/* <Banner /> */}
-      <section className="container max-w-screen-xl mx-auto my-8">
+      <section className="container px-4 max-w-screen-xl mx-auto my-8">
         <div className="flex flex-col gap-8 items-center justify-center">
           {postData && (
             <Pagination
@@ -67,7 +67,7 @@ function Properties({ bidderId }) {
               setCurrentPage={setCurrentPage}
             />
           )}
-          <div className="columns-1 md:columns-2 lg:columns-3">
+          <div className="columns-1 md:columns-2 lg:columns-3 overflow-x-hidden">
             <AnimatePresence
               initial={false}
               mode="popLayout"

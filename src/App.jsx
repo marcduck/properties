@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react"
 import { Routes, Route } from "react-router-dom"
 import Banner from "./components/Banner"
 import Hero from "./components/Hero"
-import Navbar from "./components/Navbar"
 import FeaturedProperty from "./components/FeaturedProperty"
-import Properties from "./components/Properties"
+import PropertiesPage from "./components/PropertiesPage"
 import Bank from "./components/Bank"
 import PropertyDetail from "./components/PropertyDetail"
-import Footer from "./components/Footer"
+import Navbar, { Footer } from "./components/Navbar"
+import Properties from "./components/Properties"
+import About from "./components/About"
 
 function App() {
   // App state
@@ -31,7 +32,7 @@ function App() {
   return (
     <div className="">
       <Navbar bidderId={bidderId} />
-      <main className="min-h-full">
+      <main className={`min-h-full mt-[3.5rem]`}>
         <Routes>
           <Route
             path="/"
@@ -44,9 +45,10 @@ function App() {
           />
           <Route
             path="/properties"
-            element={<Properties bidderId={bidderId} />}
+            element={<PropertiesPage bidderId={bidderId} />}
           />
           <Route path="/bank" element={<Bank />} />
+          <Route path="/about" element={<About />} />
           <Route
             path="/properties/:id"
             element={<PropertyDetail />}
