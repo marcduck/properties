@@ -9,29 +9,43 @@ import PropertyDetail from "./components/PropertyDetail"
 import Navbar, { Footer } from "./components/Navbar"
 import Properties from "./components/Properties"
 import About from "./components/About"
+import { generateBidderId, useLocalStorage } from "./utils"
+import { client } from "./components/sanity"
 
 function App() {
   // App state
-  const [bidderId, setBidderId] = useState("")
+  const [bidderId, setBidderId] = useLocalStorage(
+    "bidderId",
+    generateBidderId()
+  )
+  const [balance, setBalance] = useLocalStorage(
+    "balance",
+    10000
+  )
 
-  // Attempt to load bidderId from local storage
+  const [user, setUser] = useState(null)
+
   useEffect(() => {
-    const bidderIdFromLocalStorage =
-      localStorage.getItem("bidderId")
+    const userId = "your-user-id-here"
 
-    if (bidderIdFromLocalStorage) {
-      setBidderId(bidderIdFromLocalStorage)
-    } else {
-      // Generate random three-letter string as bidderId
-      const newBidderId = generateBidderId()
-      setBidderId(newBidderId)
-      localStorage.setItem("bidderId", newBidderId)
-    }
+    client
+      .fetch(`*[_type == "user" && _id == $userId][0]`, {
+        userId,
+      })
+      .then((userData) => {
+        setUser(userData)
+        console.log(user)
+      })
+      .catch((error) => {
+        console.error("Error fetching user:", error)
+      })
   }, [])
 
   return (
     <div className="">
-      <Navbar bidderId={bidderId} />
+      <div className="pb-4">
+        <Navbar balance={balance} bidderId={bidderId} />
+      </div>
       <main className={`min-h-full mt-[3.5rem]`}>
         <Routes>
           <Route
@@ -47,7 +61,12 @@ function App() {
             path="/properties"
             element={<PropertiesPage bidderId={bidderId} />}
           />
-          <Route path="/bank" element={<Bank />} />
+          <Route
+            path="/bank"
+            element={
+              <Bank balance={balance} bidderId={bidderId} />
+            }
+          />
           <Route path="/about" element={<About />} />
           <Route
             path="/properties/:id"

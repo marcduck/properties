@@ -4,7 +4,7 @@ import {
   NavLink,
   useLocation,
 } from "react-router-dom"
-import { appName } from "../utils"
+import { appName, cents } from "../utils"
 import Avatar from "boring-avatars"
 import { AnimatePresence, motion } from "framer-motion"
 
@@ -65,27 +65,35 @@ export function Footer() {
   )
 }
 
-export function UserMenu({ bidderId }) {
+export function UserMenu({ bidderId, balance }) {
   return (
-    <div
+    <motion.div
+      initial={{
+        visibility: "hidden",
+      }}
+      whileHover={{
+        visibility: "visible",
+      }}
       className="z-20 my-4 text-base list-none bg-white
                 absolute right-4 top-16
-              divide-gray-100 rounded-lg shadow 
-              dark:bg-gray-700 dark:divide-gray-600
-              transition
-              
+              divide-gray-100 rounded-lg shadow-lg
+              dark:bg-gray-700 dark:divide-gray-600              
               "
       id="user-dropdown"
     >
       <div className="px-4 py-3">
         <span className="block text-sm text-gray-900 dark:text-white">
-          Bidder ID: {bidderId}
+          Bidder ID:{" "}
+          <span className="font-semibold">{bidderId}</span>
         </span>
         <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
           {bidderId}@homefinder
         </span>
+        <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
+          Balance: {cents(balance)}
+        </span>
       </div>
-      <ul
+      {/* <ul
         className="py-2"
         aria-labelledby="user-menu-button"
       >
@@ -97,12 +105,12 @@ export function UserMenu({ bidderId }) {
             Dashboard
           </button>
         </li>
-      </ul>
-    </div>
+      </ul> */}
+    </motion.div>
   )
 }
 
-export default function Navbar({ bidderId }) {
+export default function Navbar({ bidderId, balance }) {
   const [isOpen, setIsOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -156,8 +164,6 @@ export default function Navbar({ bidderId }) {
             type="button"
             className="flex mr-3 text-sm bg-gray-800 relative rounded-full md:mr-0 
             focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-            onMouseEnter={() => setIsOpen(true)}
-            onMouseLeave={() => setIsOpen(false)}
             aria-expanded="false"
           >
             <span className="sr-only">Open user menu</span>
@@ -167,14 +173,13 @@ export default function Navbar({ bidderId }) {
               variant="beam"
             />
           </button>
-          {isOpen && <UserMenu bidderId={bidderId} />}
+          <UserMenu balance={balance} bidderId={bidderId} />
           <motion.button
+            onClick={() => setMenuOpen(!menuOpen)}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => setMenuOpen(!menuOpen)}
             className="inline-flex items-center p-2 mx-1 text-sm text-gray-500 rounded-lg md:hidden 
-            hover:bg-gray-100 focus:outline-none focus:ring-2 
-            focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            hover:bg-gray-100 "
           >
             <span className="sr-only">Open main menu</span>
             <svg

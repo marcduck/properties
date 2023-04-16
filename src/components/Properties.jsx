@@ -107,14 +107,4 @@ function Properties({ bidderId }) {
   )
 }
 
-function generateBidderId() {
-  const alphabet =
-    "abcdefghijklmnopqrstuvwxyz".toUpperCase()
-  return (
-    alphabet[Math.floor(Math.random() * alphabet.length)] +
-    alphabet[Math.floor(Math.random() * alphabet.length)] +
-    alphabet[Math.floor(Math.random() * alphabet.length)]
-  )
-}
-
 export default Properties

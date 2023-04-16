@@ -12,7 +12,7 @@ export default function Hero() {
       >
         <Callout to="/bank" keyword="New" />
         <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-          Find your dream home
+          Find your <span className="">dream home</span>
         </h1>
         <p className="mb-8 text-sm md:text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-200">
           Explore a world of real estate opportunities and
