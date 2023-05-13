@@ -7,34 +7,14 @@ import { Link } from "react-router-dom"
 import { AnimatePresence } from "framer-motion"
 import Banner from "./Banner"
 
-function Properties({ bidderId }) {
-  const [isLoading, setIsLoading] = useState(true)
-  const [postData, setPost] = useState([])
-
+function Properties({
+  bidderId,
+  postData,
+  isLoading,
+  setPost,
+}) {
   const [currentPage, setCurrentPage] = useState(1)
   const [pageSize, setPageSize] = useState(15)
-
-  // Fetch data from Sanity
-  useEffect(() => {
-    client
-      .fetch(
-        `*[_type == "gallery"] {
-            _id,
-            title,
-            image,
-            likes,
-            price,
-            highestBidder
-            }`
-      )
-      .then((data) => {
-        shuffle(data)
-        // console.log(data)
-        setIsLoading(false)
-        setPost(data)
-      })
-      .catch(console.error)
-  }, [])
 
   const Skeleton = ({ i }) => {
     return (
@@ -69,7 +49,7 @@ function Properties({ bidderId }) {
           )}
           <div className="columns-1 md:columns-2 lg:columns-3 overflow-x-hidden">
             <AnimatePresence
-              initial={false}
+              // initial={false}
               mode="popLayout"
             >
               {/* {isLoading && (

@@ -9,7 +9,11 @@ import PropertyDetail from "./components/PropertyDetail"
 import Navbar, { Footer } from "./components/Navbar"
 import Properties from "./components/Properties"
 import About from "./components/About"
-import { generateBidderId, useLocalStorage } from "./utils"
+import {
+  generateBidderId,
+  shuffle,
+  useLocalStorage,
+} from "./utils"
 import { client } from "./components/sanity"
 
 function App() {
@@ -22,9 +26,34 @@ function App() {
     "balance",
     10000
   )
+  const [isLoading, setIsLoading] = useState(true)
+  const [postData, setPost] = useState([])
 
   const [user, setUser] = useState(null)
 
+  // Fetch all properties from Sanity
+  useEffect(() => {
+    client
+      .fetch(
+        `*[_type == "gallery"] {
+            _id,
+            title,
+            image,
+            likes,
+            price,
+            highestBidder
+            }`
+      )
+      .then((data) => {
+        shuffle(data)
+        // console.log(data)
+        setIsLoading(false)
+        setPost(data)
+      })
+      .catch(console.error)
+  }, [])
+
+  // Fetch user
   useEffect(() => {
     const userId = "your-user-id-here"
 
@@ -34,7 +63,7 @@ function App() {
       })
       .then((userData) => {
         setUser(userData)
-        console.log(user)
+        // console.log(user)
       })
       .catch((error) => {
         console.error("Error fetching user:", error)
@@ -53,13 +82,27 @@ function App() {
             element={
               <>
                 <Hero />
-                <Properties bidderId={bidderId} />
+                <PropertiesPage
+                  bidderId={bidderId}
+                  postData={postData}
+                  setPost={setPost}
+                  balance={balance}
+                  isLoading={isLoading}
+                />
               </>
             }
           />
           <Route
             path="/properties"
-            element={<PropertiesPage bidderId={bidderId} />}
+            element={
+              <PropertiesPage
+                bidderId={bidderId}
+                postData={postData}
+                setPost={setPost}
+                balance={balance}
+                isLoading={isLoading}
+              />
+            }
           />
           <Route
             path="/bank"
@@ -70,7 +113,15 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route
             path="/properties/:id"
-            element={<PropertyDetail />}
+            element={
+              <PropertyDetail
+                bidderId={bidderId}
+                postData={postData}
+                setPost={setPost}
+                balance={balance}
+                isLoading={isLoading}
+              />
+            }
           />
         </Routes>
       </main>

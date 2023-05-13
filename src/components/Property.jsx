@@ -12,12 +12,13 @@ import {
   randInt,
 } from "../utils"
 import { client } from "./sanity"
+import { Link } from "react-router-dom"
 
 export function Property({
   post,
-  index,
   bidderId,
   setPost,
+  fullView = false,
 }) {
   const [likes, setLikes] = useState(post.likes || 0)
   const [bids, setBids] = useState(post.bidCount || 0)
@@ -37,7 +38,7 @@ export function Property({
     }`
 
   function handleLike(post) {
-    setLikes(likes + 1)
+    likes && setLikes(likes + 1)
 
     // Update the document in the Sanity database
     client
@@ -57,9 +58,11 @@ export function Property({
   }
 
   const onBidClick = (post) => {
+    if (isProcessing) {
+      return
+    }
     setIsProcessing(true)
     const newPrice = post.price + 1000
-    setBids(bids + 1)
 
     client
       .patch(post._id)
@@ -82,6 +85,7 @@ export function Property({
               : p
           )
         )
+        setBids(bids + 1)
         setIsProcessing(false)
       })
       .catch(console.error)
@@ -148,7 +152,7 @@ export function Property({
       mb-4 break-inside-avoid-column "
     >
       <>
-        <a href={urlForImg(post.image)} target="_blank">
+        <Link to={`/properties/${post._id}`}>
           {(
             <img
               className="w-full rounded-t-lg object-cover "
@@ -168,7 +172,7 @@ export function Property({
               </svg>
             </div>
           )}
-        </a>
+        </Link>
         <div className="card-bottom p-4">
           <div className="flex items-center justify-between">
             <div className="flex flex-col">
