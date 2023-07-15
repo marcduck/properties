@@ -9,9 +9,5 @@ All images are generated using StableDiffusion
 `
 
 export default function About() {
-  return (
-    <div className="py-12 px-4 max-w-screen-xl">
-      {about}
-    </div>
-  )
+  return <div className="page-container">{about}</div>
 }

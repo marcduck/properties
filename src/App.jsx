@@ -28,6 +28,7 @@ function App() {
   )
   const [isLoading, setIsLoading] = useState(true)
   const [postData, setPost] = useState([])
+  const [filter, setFilter] = useState(null)
 
   const [user, setUser] = useState(null)
 
@@ -70,6 +71,15 @@ function App() {
       })
   }, [])
 
+  const propertiesProps = {
+    bidderId,
+    postData,
+    setPost,
+    balance,
+    isLoading,
+    filter,
+  }
+
   return (
     <div className="">
       <div className="pb-4">
@@ -82,26 +92,14 @@ function App() {
             element={
               <>
                 <Hero />
-                <PropertiesPage
-                  bidderId={bidderId}
-                  postData={postData}
-                  setPost={setPost}
-                  balance={balance}
-                  isLoading={isLoading}
-                />
+                <PropertiesPage {...propertiesProps} />
               </>
             }
           />
           <Route
             path="/properties"
             element={
-              <PropertiesPage
-                bidderId={bidderId}
-                postData={postData}
-                setPost={setPost}
-                balance={balance}
-                isLoading={isLoading}
-              />
+              <PropertiesPage {...propertiesProps} />
             }
           />
           <Route
