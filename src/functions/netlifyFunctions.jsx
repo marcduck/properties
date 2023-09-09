@@ -1,5 +1,5 @@
 export function handleLike(postId, currentLikes) {
-  fetch("/.netlify/functions/likePost", {
+  fetch(`${import.meta.env.VITE_SITE_URL}/functions/likePost`, {
     method: "POST",
     body: JSON.stringify({ postId, likes: currentLikes }),
   })
