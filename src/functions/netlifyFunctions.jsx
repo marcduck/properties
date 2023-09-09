@@ -1,5 +1,5 @@
 export function handleLike(postId, currentLikes) {
-  fetch(`${import.meta.env.VITE_SITE_URL}/functions/handleLike`, {
+  fetch(`https://homefinderproperties.netlify.app/functions/handleLike`, {
     method: "POST",
     body: JSON.stringify({ postId, likes: currentLikes }),
   })
