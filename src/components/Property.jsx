@@ -6,7 +6,6 @@ import {
   useInView,
 } from "framer-motion";
 import { urlForImg, cents, censorId, randInt } from "../utils";
-import { client } from "./sanity";
 import { Link } from "react-router-dom";
 
 export function Property({ post, bidderId, setPost, fullView = false }) {
@@ -24,24 +23,6 @@ export function Property({ post, bidderId, setPost, fullView = false }) {
 
   const pluralize = (count, noun = "bids", suffix = "s") =>
     `${count ? count : 0} ${noun}${count !== 1 ? suffix : ""}`;
-
-  function handleLike(post, likes) {
-    likes && setLikes(likes + 1);
-
-    // Update the document in the Sanity database
-    client
-      .patch(post._id)
-      .set({ likes: likes + 1 })
-      .commit()
-      .then(() => {
-        console.log(`Successfully updated likes for post ${post}`);
-      })
-      .catch((error) => {
-        console.error(
-          `Failed to update likes for post ${post}: ${error.message}`
-        );
-      });
-  }
 
   const onBidClick = (post) => {
     if (isProcessing) {
