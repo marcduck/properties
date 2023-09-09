@@ -7,6 +7,7 @@ import {
 } from "framer-motion";
 import { urlForImg, cents, censorId, randInt } from "../utils";
 import { Link } from "react-router-dom";
+import { handleLike } from "../functions/netlifyFunctions";
 
 export function Property({ post, bidderId, setPost, fullView = false }) {
   const [likes, setLikes] = useState(post.likes || 0);
@@ -187,7 +188,7 @@ export function Property({ post, bidderId, setPost, fullView = false }) {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => handleLike(post)}
+                  onClick={() => handleLike(post, likes)}
                   className=""
                 >
                   <svg
