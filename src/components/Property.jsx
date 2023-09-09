@@ -25,7 +25,7 @@ export function Property({ post, bidderId, setPost, fullView = false }) {
   const pluralize = (count, noun = "bids", suffix = "s") =>
     `${count ? count : 0} ${noun}${count !== 1 ? suffix : ""}`;
 
-  function handleLike(post) {
+  function handleLike(post, likes) {
     likes && setLikes(likes + 1);
 
     // Update the document in the Sanity database

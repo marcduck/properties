@@ -15,7 +15,7 @@ export default function PropertyDetail({
   const currentPost = postData.find((post) => post._id === id);
 
   return (
-    <div className="border-red-500 border pt-1 flex justify-center">
+    <div className=" pt-1 flex justify-center">
       {!isLoading && (
         <Property
           post={currentPost}
