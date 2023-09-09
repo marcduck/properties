@@ -1,9 +1,9 @@
-import React from "react"
-import { cents } from "../utils"
+import React from "react";
+import { cents } from "../utils";
 
 function Tabs() {
   const iconClass =
-    "w-5 h-5 mr-2 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
+    "w-5 h-5 mr-2 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300";
   const tabItems = [
     {
       name: "Profile",
@@ -23,7 +23,7 @@ function Tabs() {
         </svg>
       ),
     },
-  ]
+  ];
   return (
     <div className="border-b border-gray-200 dark:border-gray-700">
       <ul className="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
@@ -37,12 +37,19 @@ function Tabs() {
         ))}
       </ul>
     </div>
-  )
+  );
 }
 
 function Dashboard({ balance, bidderId }) {
   return (
     <div className="container page-container">
+      <div
+        class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-100 dark:bg-gray-800 dark:text-yellow-300"
+        role="alert"
+      >
+        <span class="font-medium">Notice:</span> The bank is currently under
+        construction
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Balance card */}
         <div className="bg-blue-300/30 p-10 rounded-lg">
@@ -61,7 +68,7 @@ function Dashboard({ balance, bidderId }) {
         <div className="bg-slate-400 col-span-2 rounded-lg p-10"></div>
       </div>
     </div>
-  )
+  );
 }
 
 export default function Bank({ balance, bidderId }) {
@@ -70,5 +77,5 @@ export default function Bank({ balance, bidderId }) {
       {/* <Tabs /> */}
       <Dashboard balance={balance} bidderId={bidderId} />
     </div>
-  )
+  );
 }

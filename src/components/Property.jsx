@@ -1,44 +1,32 @@
-import React, { useEffect, useState, useRef } from "react"
+import React, { useEffect, useState, useRef } from "react";
 
 import {
   motion,
   // useAnimation,
   useInView,
-} from "framer-motion"
-import {
-  urlForImg,
-  cents,
-  censorId,
-  randInt,
-} from "../utils"
-import { client } from "./sanity"
-import { Link } from "react-router-dom"
+} from "framer-motion";
+import { urlForImg, cents, censorId, randInt } from "../utils";
+import { client } from "./sanity";
+import { Link } from "react-router-dom";
 
-export function Property({
-  post,
-  bidderId,
-  setPost,
-  fullView = false,
-}) {
-  const [likes, setLikes] = useState(post.likes || 0)
-  const [bids, setBids] = useState(post.bidCount || 0)
+export function Property({ post, bidderId, setPost, fullView = false }) {
+  const [likes, setLikes] = useState(post.likes || 0);
+  const [bids, setBids] = useState(post.bidCount || 0);
 
-  const [isProcessing, setIsProcessing] = useState(false)
+  const [isProcessing, setIsProcessing] = useState(false);
 
   if (post.price === null) {
-    post.price = 0
+    post.price = 0;
   }
 
-  const ref = useRef(null)
-  const isInView = useInView(ref)
+  const ref = useRef(null);
+  const isInView = useInView(ref);
 
   const pluralize = (count, noun = "bids", suffix = "s") =>
-    `${count ? count : 0} ${noun}${
-      count !== 1 ? suffix : ""
-    }`
+    `${count ? count : 0} ${noun}${count !== 1 ? suffix : ""}`;
 
   function handleLike(post) {
-    likes && setLikes(likes + 1)
+    likes && setLikes(likes + 1);
 
     // Update the document in the Sanity database
     client
@@ -46,23 +34,21 @@ export function Property({
       .set({ likes: likes + 1 })
       .commit()
       .then(() => {
-        console.log(
-          `Successfully updated likes for post ${post}`
-        )
+        console.log(`Successfully updated likes for post ${post}`);
       })
       .catch((error) => {
         console.error(
           `Failed to update likes for post ${post}: ${error.message}`
-        )
-      })
+        );
+      });
   }
 
   const onBidClick = (post) => {
     if (isProcessing) {
-      return
+      return;
     }
-    setIsProcessing(true)
-    const newPrice = post.price + 1000
+    setIsProcessing(true);
+    const newPrice = post.price + 1000;
 
     client
       .patch(post._id)
@@ -84,12 +70,12 @@ export function Property({
                 }
               : p
           )
-        )
-        setBids(bids + 1)
-        setIsProcessing(false)
+        );
+        setBids(bids + 1);
+        setIsProcessing(false);
       })
-      .catch(console.error)
-  }
+      .catch(console.error);
+  };
 
   function SpinnerButton(text = "bid") {
     return (
@@ -127,29 +113,28 @@ export function Property({
           "Bid"
         )}
       </motion.button>
-    )
+    );
   }
 
+  // Property card
   return (
     <motion.div
       ref={ref}
       id={post._id}
       initial={{ opacity: 0 }}
-      animate={
-        isInView
-          ? { opacity: 1 }
-          : { opacity: 0, x: randInt(-50, 50) }
-      }
+      animate={isInView ? { opacity: 1 } : { opacity: 0, x: randInt(-50, 50) }}
       transition={{
         duration: 0.6,
         type: "spring",
         damping: randInt(10, 20),
       }}
       exit={{ opacity: 0 }}
-      className="w-full h-min max-w-md 
+      className={`w-full h-min max-w-md 
       bg-white border border-gray-200 
       rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 
-      mb-4 break-inside-avoid-column "
+      mb-4 break-inside-avoid-column
+      
+      `}
     >
       <>
         <Link to={`/properties/${post._id}`}>
@@ -248,5 +233,5 @@ export function Property({
         </div>
       </>
     </motion.div>
-  )
+  );
 }
