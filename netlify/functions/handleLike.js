@@ -1,4 +1,4 @@
-import { client } from "../src/components/sanity";
+import { client } from "../../src/components/sanity";
 
 // Define the Netlify function
 exports.handler = async (event) => {
