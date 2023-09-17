@@ -6,7 +6,9 @@ import { fetchPostById } from "../utils";
 export default function PropertyDetail({ bidderId, isLoading, setPost }) {
   let { id } = useParams();
 
-  const currentPost = fetchPostById(id)
+  const currentPost = fetchData("fetchProperty", {
+    _id: id,
+  })
     .then((propertyPost) => {
       // Handle success
       // console.log("Post fetched successfully:", post);

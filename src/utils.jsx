@@ -20,21 +20,16 @@ export async function fetchData(action, body = {}) {
       body: JSON.stringify(body),
     };
   }
-  try {
-    const url = import.meta.env.VITE_FUNCTIONS_URL + action;
-    console.log({ url, requestInfo });
-    const response = await fetch(url, requestInfo);
+  const url = import.meta.env.VITE_FUNCTIONS_URL + action;
+  console.log({ url, requestInfo });
+  const response = await fetch(url, requestInfo);
 
-    if (!response.ok) {
-      throw new Error(`Request failed with status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    throw error;
+  if (!response.ok) {
+    throw new Error(`Request failed with status: ${response.status}`);
   }
+
+  const data = await response.json();
+  return data;
 }
 
 export async function placeBid(post, action = "handleBid") {
