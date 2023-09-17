@@ -33,10 +33,15 @@ exports.handler = async () => {
       const output = data.map((property) => {
         return {
           ...property,
-          propertyImage: urlForImg(builder, property.image, 800),
+          // Formatted image URL
+          propertyImage: builder
+            .image(property.image)
+            .fit("max")
+            .auto("format")
+            .url(),
         };
       });
-      return data;
+      return output;
     })
     .catch(console.error);
 
