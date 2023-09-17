@@ -62,8 +62,8 @@ export function Property({ post, bidderId, setPost, fullView = false }) {
   function SpinnerButton(text = "bid") {
     return (
       <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={!isProcessing && { scale: 1.05 }}
+        whileTap={!isProcessing && { scale: 0.95 }}
         onClick={() => onBidClick(post)}
         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 
               focus:outline-none focus:ring-blue-300 font-medium rounded-lg 
@@ -71,7 +71,7 @@ export function Property({ post, bidderId, setPost, fullView = false }) {
               dark:hover:bg-blue-700 dark:focus:ring-blue-800 "
       >
         {isProcessing ? (
-          <div className="inline-flex items-center">
+          <div className="inline-flex items-center point">
             <svg
               className="inline w-3.5 h-3.5 mr-3 text-white animate-spin"
               aria-hidden="true"

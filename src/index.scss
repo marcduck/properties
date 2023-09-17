@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "react-credit-cards-2/dist/lib/styles.scss";
+
 .arrowbutton {
   @apply block px-3 py-2 ml-0 leading-tight text-slate-500 bg-white border border-slate-300  hover:bg-slate-100 hover:text-slate-700 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-400 dark:hover:bg-slate-700 dark:hover:text-white disabled:bg-gray-200 disabled:hover:text-slate-500;
 }
@@ -16,4 +18,8 @@ html {
 
 .page-container {
   @apply py-12 px-4 max-w-screen-xl mx-auto;
+}
+
+.rcss {
+  $rcss-shadow: 0 0 20px rgba(#000, 0.9);
 }

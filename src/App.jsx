@@ -1,36 +1,29 @@
-import React, { useEffect, useState } from "react"
-import { Routes, Route } from "react-router-dom"
-import Banner from "./components/Banner"
-import Hero from "./components/Hero"
-import FeaturedProperty from "./components/FeaturedProperty"
-import PropertiesPage from "./components/PropertiesPage"
-import Bank from "./components/Bank"
-import PropertyDetail from "./components/PropertyDetail"
-import Navbar, { Footer } from "./components/Navbar"
-import Properties from "./components/Properties"
-import About from "./components/About"
-import {
-  generateBidderId,
-  shuffle,
-  useLocalStorage,
-} from "./utils"
-import { client } from "./components/sanity"
+import React, { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import Banner from "./components/Banner";
+import Hero from "./components/Hero";
+import FeaturedProperty from "./components/FeaturedProperty";
+import PropertiesPage from "./components/PropertiesPage";
+import Bank from "./components/Bank";
+import PropertyDetail from "./components/PropertyDetail";
+import Navbar, { Footer } from "./components/Navbar";
+import Properties from "./components/Properties";
+import About from "./components/About";
+import { generateBidderId, shuffle, useLocalStorage } from "./utils";
+import { client } from "./components/sanity";
 
 function App() {
   // App state
   const [bidderId, setBidderId] = useLocalStorage(
     "bidderId",
     generateBidderId()
-  )
-  const [balance, setBalance] = useLocalStorage(
-    "balance",
-    10000
-  )
-  const [isLoading, setIsLoading] = useState(true)
-  const [postData, setPost] = useState([])
-  const [filter, setFilter] = useState(null)
+  );
+  const [balance, setBalance] = useLocalStorage("balance", 10000);
+  const [isLoading, setIsLoading] = useState(true);
+  const [postData, setPost] = useState([]);
+  const [filter, setFilter] = useState(null);
 
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
 
   // Fetch all properties from Sanity
   useEffect(() => {
@@ -46,30 +39,30 @@ function App() {
             }`
       )
       .then((data) => {
-        shuffle(data)
+        shuffle(data);
         // console.log(data)
-        setIsLoading(false)
-        setPost(data)
+        setIsLoading(false);
+        setPost(data);
       })
-      .catch(console.error)
-  }, [])
+      .catch(console.error);
+  }, []);
 
   // Fetch user
   useEffect(() => {
-    const userId = "your-user-id-here"
+    const userId = "your-user-id-here";
 
     client
       .fetch(`*[_type == "user" && _id == $userId][0]`, {
         userId,
       })
       .then((userData) => {
-        setUser(userData)
+        setUser(userData);
         // console.log(user)
       })
       .catch((error) => {
-        console.error("Error fetching user:", error)
-      })
-  }, [])
+        console.error("Error fetching user:", error);
+      });
+  }, []);
 
   const propertiesProps = {
     bidderId,
@@ -78,7 +71,7 @@ function App() {
     balance,
     isLoading,
     filter,
-  }
+  };
 
   return (
     <div className="">
@@ -98,15 +91,11 @@ function App() {
           />
           <Route
             path="/properties"
-            element={
-              <PropertiesPage {...propertiesProps} />
-            }
+            element={<PropertiesPage {...propertiesProps} />}
           />
           <Route
             path="/bank"
-            element={
-              <Bank balance={balance} bidderId={bidderId} />
-            }
+            element={<Bank balance={balance} bidderId={bidderId} />}
           />
           <Route path="/about" element={<About />} />
           <Route
@@ -125,7 +114,7 @@ function App() {
       </main>
       <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
