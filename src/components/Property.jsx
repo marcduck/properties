@@ -35,6 +35,7 @@ export function Property({ post, bidderId, setPost, fullView = false }) {
       .then((data) => {
         console.log("Bid placed successfully:", data);
         setIsProcessing(false);
+        setPost(post);
       })
       .catch((error) => {
         console.error("Error placing bid:", error);

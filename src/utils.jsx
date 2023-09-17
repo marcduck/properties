@@ -48,6 +48,33 @@ export async function placeBid(post, action = "handleBid") {
   }
 }
 
+export async function fetchPostById(postId) {
+  const requestBody = {
+    _id: postId, // Pass the ID of the post you want to fetch
+  };
+
+  try {
+    const response = await fetch("/.netlify/functions/fetchPostById", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Post fetched successfully:", data);
+    return data;
+  } catch (error) {
+    console.error("Error fetching post:", error);
+    throw error;
+  }
+}
+
 export const useLocalStorage = (key, initialValue) => {
   const [storedValue, setStoredValue] = useState(() => {
     try {
