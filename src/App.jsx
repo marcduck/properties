@@ -30,7 +30,7 @@ function App() {
   async function fetchProperties() {
     try {
       const response = await fetch(
-        "https://homefinderproperties.netlify.app/.netlify/functions/fetchProperties"
+        process.env.VITE_FUNCTIONS_URL + "fetchProperties"
       );
 
       if (!response.ok) {
