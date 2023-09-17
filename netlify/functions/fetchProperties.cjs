@@ -1,20 +1,13 @@
 import { createClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 
-const projectId = "1emj1fo4";
-const dataset = "production";
-
 const sanity = createClient({
-  projectId: projectId,
-  dataset: dataset,
+  projectId: "1emj1fo4",
+  dataset: "production",
   token: process.env.VITE_SANITY_API_KEY,
   useCdn: false, // set to `true` to fetch from edge cache
   apiVersion: `${new Date().toISOString().slice(0, 10)}`, // use current date (YYYY-MM-DD) to target the latest API version
 });
-
-function urlForImg(builder, source, width) {
-  return builder.image(source).fit("max").auto("format").url();
-}
 
 exports.handler = async () => {
   const query = `*[_type == "gallery"] {
@@ -48,6 +41,10 @@ exports.handler = async () => {
   return {
     statusCode: 200,
     headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
+      // ^ Cors stuff
       "Content-Type": "application/json",
     },
     body: JSON.stringify(properties),

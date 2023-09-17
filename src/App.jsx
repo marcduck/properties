@@ -30,7 +30,7 @@ function App() {
   async function fetchProperties() {
     try {
       const response = await fetch(
-        process.env.VITE_FUNCTIONS_URL + "fetchProperties"
+        import.meta.env.VITE_FUNCTIONS_URL + "fetchProperties"
       );
 
       if (!response.ok) {

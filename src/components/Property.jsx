@@ -5,7 +5,7 @@ import {
   // useAnimation,
   useInView,
 } from "framer-motion";
-import { urlForImg, cents, censorId, randInt } from "../utils";
+import { cents, censorId, randInt } from "../utils";
 import { Link } from "react-router-dom";
 import { handleLike } from "../functions/netlifyFunctions";
 
@@ -123,7 +123,7 @@ export function Property({ post, bidderId, setPost, fullView = false }) {
           {(
             <img
               className="w-full rounded-t-lg object-cover "
-              src={urlForImg(post.image)}
+              src={post.propertyImage}
               alt="product image"
             />
           ) || (
