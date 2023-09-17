@@ -1,7 +1,7 @@
 import { client } from "../../src/components/sanity";
 
 // Define the Netlify function
-export default api = async (event) => {
+export default async (event) => {
   try {
     // Parse the post ID and current likes from the event body
     const { postId, likes } = JSON.parse(event.body);

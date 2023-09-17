@@ -1,4 +1,4 @@
-export default api = async (event, context) => {
+export default async (event, context) => {
   const data = { message: "Hello from Netlify Functions!" };
   return {
     statusCode: 200,
