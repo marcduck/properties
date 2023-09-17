@@ -26,7 +26,15 @@ function App() {
   const [user, setUser] = useState(null);
 
   // Fetch all properties from Sanity
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const data = fetch(import.meta.env.VITE_FUNCTIONS_URL + "fetchProperties")
+      .then((res) => res.json())
+      .then((data) => {
+        setPost(data);
+        setIsLoading(false);
+        console.log(data);
+      });
+  }, []);
 
   // Fetch user
   useEffect(() => {
