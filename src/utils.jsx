@@ -9,9 +9,21 @@ export function censorId(id = "000") {
   return `${id[0]}••`;
 }
 
-export async function fetchData(action = "fetchProperties") {
+export async function fetchData(action, body = {}) {
+  let requestInfo;
+  if (Object.keys(body).length > 0) {
+    requestInfo = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    };
+  }
   try {
-    const response = await fetch(import.meta.env.VITE_FUNCTIONS_URL + action);
+    const url = import.meta.env.VITE_FUNCTIONS_URL + action;
+    console.log({ url, requestInfo });
+    const response = await fetch(url, requestInfo);
 
     if (!response.ok) {
       throw new Error(`Request failed with status: ${response.status}`);
@@ -20,7 +32,7 @@ export async function fetchData(action = "fetchProperties") {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error fetching properties:", error);
+    console.error("Error fetching data:", error);
     throw error;
   }
 }

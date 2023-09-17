@@ -38,11 +38,11 @@ function App() {
   }, []);
 
   // Fetch user
-  useEffect(() => {
-    const userId = bidderId;
-    const userData = fetchData("fetchUser", userId);
-    setUser(userData);
-  }, []);
+  // useEffect(() => {
+  //   const userId = bidderId;
+  //   const userData = fetchData("fetchUser", userId);
+  //   setUser(userData);
+  // }, []);
 
   const propertiesProps = {
     bidderId,
