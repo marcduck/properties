@@ -1,7 +1,0 @@
-export default async (event, context) => {
-  const data = { message: "Hello from Netlify Functions!" };
-  return {
-    statusCode: 200,
-    body: JSON.stringify(data.message),
-  };
-};
