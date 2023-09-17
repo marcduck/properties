@@ -26,16 +26,33 @@ function App() {
   const [user, setUser] = useState(null);
 
   // Fetch all properties from Sanity
+
+  async function fetchProperties() {
+    try {
+      const response = await fetch(
+        "https://homefinderproperties.netlify.app/.netlify/functions/fetchProperties"
+      );
+
+      if (!response.ok) {
+        throw new Error(`Request failed with status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error fetching properties:", error);
+      throw error;
+    }
+  }
+
   useEffect(() => {
-    const data = fetch(import.meta.env.VITE_FUNCTIONS_URL + "fetchProperties")
-      .then((res) => {
-        console.log(res);
-        return res.json();
+    fetchProperties()
+      .then((properties) => {
+        console.log(properties);
+        setPost(properties);
       })
-      .then((data) => {
-        setPost(data);
-        setIsLoading(false);
-        console.log(data);
+      .catch((error) => {
+        console.error("An error occurred:", error);
       });
   }, []);
 
