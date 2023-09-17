@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Property } from "./Property";
 import { useParams } from "react-router-dom";
-import { fetchPostById } from "../utils";
+import { fetchData, fetchPostById } from "../utils";
 
 export default function PropertyDetail({ bidderId, isLoading, setPost }) {
   let { id } = useParams();
