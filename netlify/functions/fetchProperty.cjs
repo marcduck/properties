@@ -32,18 +32,15 @@ exports.handler = async (event) => {
       .then((data) => {
         const builder = imageUrlBuilder(sanity);
 
-        const output = data.map((property) => {
-          return {
-            ...property,
-            // Formatted image URL
-            propertyImage: builder
-              .image(property.image)
-              .fit("max")
-              .auto("format")
-              .url(),
-          };
-        });
-        return output;
+        return {
+          ...data,
+          // Formatted image URL
+          propertyImage: builder
+            .image(data.image)
+            .fit("max")
+            .auto("format")
+            .url(),
+        };
       });
 
     if (properties.length === 0) {
