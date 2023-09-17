@@ -25,6 +25,29 @@ export async function fetchData(action = "fetchProperties") {
   }
 }
 
+export async function placeBid(post, action = "handleBid") {
+  try {
+    const response = await fetch(import.meta.env.VITE_FUNCTIONS_URL + action, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(post),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log("Bid placed successfully:", data);
+    return data;
+  } catch (error) {
+    console.error("Error placing bid:", error);
+    throw error;
+  }
+}
+
 export const useLocalStorage = (key, initialValue) => {
   const [storedValue, setStoredValue] = useState(() => {
     try {

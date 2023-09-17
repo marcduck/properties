@@ -30,33 +30,16 @@ export function Property({ post, bidderId, setPost, fullView = false }) {
       return;
     }
     setIsProcessing(true);
-    const newPrice = post.price + 1000;
 
-    client
-      .patch(post._id)
-      .set({
-        price: newPrice,
-        highestBidder: bidderId,
-        bidCount: bids + 1,
-      })
-      .commit()
-      .then(() => {
-        setPost((prevData) =>
-          prevData.map((p) =>
-            p._id === post._id
-              ? {
-                  ...p,
-                  price: newPrice,
-                  highestBidder: bidderId,
-                  bidCount: bids ? bids + 1 : 0,
-                }
-              : p
-          )
-        );
-        setBids(bids + 1);
+    placeBid(post)
+      .then((data) => {
+        console.log("Bid placed successfully:", data);
         setIsProcessing(false);
       })
-      .catch(console.error);
+      .catch((error) => {
+        console.error("Error placing bid:", error);
+        setIsProcessing(false);
+      });
   };
 
   function SpinnerButton(text = "bid") {
