@@ -39,7 +39,7 @@ function App() {
 
   // Fetch user
   useEffect(() => {
-    const userId = "your-user-id-here";
+    const userId = bidderId;
     const userData = fetchData("fetchUser", userId);
     setUser(userData);
   }, []);

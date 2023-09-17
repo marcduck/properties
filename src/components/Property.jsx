@@ -5,7 +5,7 @@ import {
   // useAnimation,
   useInView,
 } from "framer-motion";
-import { cents, censorId, randInt } from "../utils";
+import { cents, censorId, randInt, placeBid } from "../utils";
 import { Link } from "react-router-dom";
 import { handleLike } from "../functions/netlifyFunctions";
 
