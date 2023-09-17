@@ -55,7 +55,7 @@ export async function fetchPostById(postId) {
 
   try {
     const response = await fetch(
-      import.meta.env.VITE_FUNCTIONS_URL + "fetchPostById",
+      import.meta.env.VITE_FUNCTIONS_URL + "fetchProperty",
       {
         method: "POST",
         headers: {
