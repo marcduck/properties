@@ -43,19 +43,6 @@ exports.handler = async (event) => {
         };
       });
 
-    if (properties.length === 0) {
-      return {
-        statusCode: 404,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Headers": "Content-Type",
-          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ error: "Post not found" }),
-      };
-    }
-
     return {
       statusCode: 200,
       headers: {
