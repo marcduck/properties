@@ -11,7 +11,7 @@ export const dataset = "production";
 export const client = createClient({
   projectId: projectId,
   dataset: dataset,
-  token: import.meta.env.VITE_SANITY_API_KEY,
+  token: process.env.VITE_SANITY_API_KEY,
   useCdn: false, // set to `true` to fetch from edge cache
   apiVersion: `${new Date().toISOString().slice(0, 10)}`, // use current date (YYYY-MM-DD) to target the latest API version
 });
