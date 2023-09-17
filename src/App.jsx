@@ -26,26 +26,7 @@ function App() {
   const [user, setUser] = useState(null);
 
   // Fetch all properties from Sanity
-  useEffect(() => {
-    client
-      .fetch(
-        `*[_type == "gallery"] {
-            _id,
-            title,
-            image,
-            likes,
-            price,
-            highestBidder
-            }`
-      )
-      .then((data) => {
-        shuffle(data);
-        // console.log(data)
-        setIsLoading(false);
-        setPost(data);
-      })
-      .catch(console.error);
-  }, []);
+  useEffect(() => {}, []);
 
   // Fetch user
   useEffect(() => {
