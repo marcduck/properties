@@ -8,7 +8,7 @@ import imageUrlBuilder from "@sanity/image-url";
 export const projectId = "1emj1fo4";
 export const dataset = "production";
 
-export const client = createClient({
+const client = createClient({
   projectId: projectId,
   dataset: dataset,
   token: import.meta.env.VITE_SANITY_API_KEY,
@@ -18,6 +18,6 @@ export const client = createClient({
 
 const builder = imageUrlBuilder(client);
 
-export function urlFor(source) {
+function urlFor(source) {
   return builder.image(source);
 }

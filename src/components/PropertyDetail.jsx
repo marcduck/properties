@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { client } from "./sanity";
 import { Property } from "./Property";
 import { useParams } from "react-router-dom";
-import { shuffle } from "../utils";
 
 export default function PropertyDetail({
   bidderId,

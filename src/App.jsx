@@ -9,8 +9,7 @@ import PropertyDetail from "./components/PropertyDetail";
 import Navbar, { Footer } from "./components/Navbar";
 import Properties from "./components/Properties";
 import About from "./components/About";
-import { generateBidderId, shuffle, useLocalStorage } from "./utils";
-import { client } from "./components/sanity";
+import { fetchData, generateBidderId, shuffle, useLocalStorage } from "./utils";
 
 function App() {
   // App state
@@ -27,26 +26,8 @@ function App() {
 
   // Fetch all properties from Sanity
 
-  async function fetchProperties() {
-    try {
-      const response = await fetch(
-        import.meta.env.VITE_FUNCTIONS_URL + "fetchProperties"
-      );
-
-      if (!response.ok) {
-        throw new Error(`Request failed with status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("Error fetching properties:", error);
-      throw error;
-    }
-  }
-
   useEffect(() => {
-    fetchProperties()
+    fetchData("fetchProperties")
       .then((properties) => {
         console.log(properties);
         setPost(properties);
@@ -59,18 +40,8 @@ function App() {
   // Fetch user
   useEffect(() => {
     const userId = "your-user-id-here";
-
-    client
-      .fetch(`*[_type == "user" && _id == $userId][0]`, {
-        userId,
-      })
-      .then((userData) => {
-        setUser(userData);
-        // console.log(user)
-      })
-      .catch((error) => {
-        console.error("Error fetching user:", error);
-      });
+    const userData = fetchData("fetchUser", userId);
+    setUser(userData);
   }, []);
 
   const propertiesProps = {
