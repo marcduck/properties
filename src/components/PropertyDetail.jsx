@@ -7,9 +7,10 @@ export default function PropertyDetail({ bidderId, isLoading, setPost }) {
   let { id } = useParams();
 
   const currentPost = fetchPostById(id)
-    .then((post) => {
+    .then((propertyPost) => {
       // Handle success
-      console.log("Post fetched successfully:", post);
+      // console.log("Post fetched successfully:", post);
+      setPost(propertyPost);
     })
     .catch((error) => {
       // Handle error

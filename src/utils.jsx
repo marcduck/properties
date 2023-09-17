@@ -70,7 +70,7 @@ export async function fetchPostById(postId) {
     }
 
     const data = await response.json();
-    console.log("Post fetched successfully:", data);
+    // console.log("Post fetched successfully:", data);
     return data;
   } catch (error) {
     console.error("Error fetching post:", error);
