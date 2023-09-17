@@ -28,7 +28,10 @@ function App() {
   // Fetch all properties from Sanity
   useEffect(() => {
     const data = fetch(import.meta.env.VITE_FUNCTIONS_URL + "fetchProperties")
-      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        return res.json();
+      })
       .then((data) => {
         setPost(data);
         setIsLoading(false);
