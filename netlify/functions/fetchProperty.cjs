@@ -12,10 +12,12 @@ const sanity = createClient({
 exports.handler = async (event) => {
   try {
     // Parse the incoming POST request body as JSON
-    const requestBody = JSON.parse(event.body);
+    // const requestBody = JSON.parse(event.body);
 
     // Extract the _id from the request body
-    const { _id } = requestBody;
+    // const _id = "01ebe080-a3ed-457a-81c4-62847f0eb1f8";
+    console.log(JSON.parse(event.body));
+    const { _id } = JSON.parse(event.body);
 
     // Construct a query to fetch the specific post based on _id
     const query = `*[_type == "gallery" && _id == $postId] {
@@ -30,6 +32,7 @@ exports.handler = async (event) => {
     const properties = await sanity
       .fetch(query, { postId: _id })
       .then((data) => {
+        data = data[0];
         const builder = imageUrlBuilder(sanity);
 
         return {
