@@ -18,24 +18,8 @@ function App() {
     generateBidderId()
   );
   const [balance, setBalance] = useLocalStorage("balance", 10000);
-  const [isLoading, setIsLoading] = useState(true);
-  const [postData, setPost] = useState([]);
-  const [filter, setFilter] = useState(null);
 
   const [user, setUser] = useState(null);
-
-  // Fetch all properties from Sanity
-
-  useEffect(() => {
-    fetchData("fetchProperties")
-      .then((properties) => {
-        console.log(properties);
-        setPost(properties);
-      })
-      .catch((error) => {
-        console.error("An error occurred:", error);
-      });
-  }, []);
 
   // Fetch user
   // useEffect(() => {
@@ -46,11 +30,11 @@ function App() {
 
   const propertiesProps = {
     bidderId,
-    postData,
-    setPost,
+    // postData,
+    // setPost,
     balance,
-    isLoading,
-    filter,
+    // isLoading,
+    // filter,
   };
 
   return (
