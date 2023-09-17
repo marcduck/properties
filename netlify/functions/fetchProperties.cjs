@@ -12,6 +12,10 @@ const sanity = createClient({
   apiVersion: `${new Date().toISOString().slice(0, 10)}`, // use current date (YYYY-MM-DD) to target the latest API version
 });
 
+function urlForImg(builder, source, width) {
+  return builder.image(source).fit("max").auto("format").url();
+}
+
 exports.handler = async () => {
   const query = `*[_type == "gallery"] {
                 _id,
@@ -24,6 +28,14 @@ exports.handler = async () => {
   const properties = await sanity
     .fetch(query)
     .then((data) => {
+      const builder = imageUrlBuilder(sanity);
+
+      const output = data.map((property) => {
+        return {
+          ...property,
+          propertyImage: urlForImg(builder, property.image, 800),
+        };
+      });
       return data;
     })
     .catch(console.error);
