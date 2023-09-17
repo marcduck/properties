@@ -22,4 +22,9 @@ export function urlFor(source) {
   return builder.image(source);
 }
 
-export default client;
+exports.handler = async () => {
+  return {
+    statusCode: 200,
+    body: JSON.stringify({ message: client }),
+  };
+};
