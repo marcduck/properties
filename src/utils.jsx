@@ -32,14 +32,17 @@ export async function fetchData(action, body = {}) {
   return data;
 }
 
-export async function placeBid(post, action = "handleBid") {
+export async function placeBid(post, bidderId = "aaa", action = "handleBid") {
   try {
     const response = await fetch(import.meta.env.VITE_FUNCTIONS_URL + action, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(post),
+      body: JSON.stringify({
+        ...post,
+        bidderId: bidderId,
+      }),
     });
 
     if (!response.ok) {
