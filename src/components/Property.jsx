@@ -9,7 +9,7 @@ import { cents, censorId, randInt, placeBid } from "../utils";
 import { Link } from "react-router-dom";
 import { handleLike } from "../functions/netlifyFunctions";
 
-export function Property({ post, bidderId, setPost, fullView = false }) {
+export function Property({ post, bidderId, fullView = false }) {
   const [likes, setLikes] = useState(post.likes || 0);
   const [bids, setBids] = useState(post.bidCount || 0);
 
@@ -25,7 +25,7 @@ export function Property({ post, bidderId, setPost, fullView = false }) {
   const pluralize = (count, noun = "bids", suffix = "s") =>
     `${count ? count : 0} ${noun}${count !== 1 ? suffix : ""}`;
 
-  const onBidClick = (post) => {
+  const onBidClick = (post, bidderId) => {
     if (isProcessing) {
       return;
     }
@@ -35,7 +35,6 @@ export function Property({ post, bidderId, setPost, fullView = false }) {
       .then((data) => {
         console.log("Bid placed successfully:", data);
         setIsProcessing(false);
-        setPost(post);
       })
       .catch((error) => {
         console.error("Error placing bid:", error);
