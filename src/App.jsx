@@ -64,15 +64,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route
             path="/properties/:id"
-            element={
-              <PropertyDetail
-                bidderId={bidderId}
-                postData={postData}
-                setPost={setPost}
-                balance={balance}
-                isLoading={isLoading}
-              />
-            }
+            element={<PropertyDetail bidderId={bidderId} balance={balance} />}
           />
         </Routes>
       </main>

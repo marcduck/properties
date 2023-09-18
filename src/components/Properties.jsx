@@ -2,10 +2,20 @@ import React, { useEffect, useState, useId } from "react";
 import Pagination from "./Pagination";
 import { Property } from "./Property";
 import { AnimatePresence } from "framer-motion";
+import { fetchData } from "../utils";
 
-function Properties({ bidderId, postData, isLoading, setPost }) {
+function Properties({ bidderId, balance }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(15);
+  const [postData, setPostData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetchData("fetchProperties").then((data) => {
+      setPostData(data);
+      setIsLoading(false);
+    });
+  }, []);
 
   const Skeleton = ({ i }) => {
     return (
@@ -50,12 +60,7 @@ function Properties({ bidderId, postData, isLoading, setPost }) {
               {currentPosts.length &&
                 currentPosts.map((post, index) => (
                   <React.Fragment key={post._id}>
-                    <Property
-                      post={post}
-                      index={index}
-                      bidderId={bidderId}
-                      setPost={setPost}
-                    />
+                    <Property post={post} index={index} bidderId={bidderId} />
                   </React.Fragment>
                 ))}
             </AnimatePresence>

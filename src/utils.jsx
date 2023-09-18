@@ -147,6 +147,9 @@ export function numberWithCommas(x) {
 }
 
 export function cents(n) {
+  if (!parseInt(n)) {
+    n = 0;
+  }
   return "$" + numberWithCommas(n.toFixed(2));
 }
 
