@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from "react"
-import {
-  Link,
-  NavLink,
-  useLocation,
-} from "react-router-dom"
-import { appName, cents } from "../utils"
-import Avatar from "boring-avatars"
-import { AnimatePresence, motion } from "framer-motion"
+import React, { useEffect, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { appName, cents } from "../utils";
+import Avatar from "boring-avatars";
+import { AnimatePresence, motion } from "framer-motion";
 
 const links = [
   {
@@ -25,11 +21,11 @@ const links = [
     name: "About",
     path: "/about",
   },
-]
+];
 
 export function Footer() {
-  const location = useLocation()
-  const isBank = location.pathname === "/bank"
+  const location = useLocation();
+  const isBank = location.pathname === "/bank";
 
   return (
     <footer
@@ -40,21 +36,15 @@ export function Footer() {
       <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
         <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
           © {new Date().getFullYear()}{" "}
-          <Link
-            className="font-semibold hover:underline"
-            to="/"
-          >
+          <Link className="font-semibold hover:underline" to="/">
             HomeFinder
           </Link>
           . All Rights Reserved.
         </span>
-        <ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-blue-900 dark:text-gray-400 sm:mt-0">
+        <ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-emerald-900 dark:text-gray-400 sm:mt-0">
           {links.map((link) => (
             <li key={link.name}>
-              <Link
-                to={link.path}
-                className="mr-4 hover:underline md:mr-6 "
-              >
+              <Link to={link.path} className="mr-4 hover:underline md:mr-6 ">
                 {link.name}
               </Link>
             </li>
@@ -62,7 +52,7 @@ export function Footer() {
         </ul>
       </div>
     </footer>
-  )
+  );
 }
 
 export function UserMenu({ bidderId, balance }) {
@@ -83,8 +73,7 @@ export function UserMenu({ bidderId, balance }) {
     >
       <div className="px-4 py-3">
         <span className="block text-sm text-gray-900 dark:text-white">
-          Bidder ID:{" "}
-          <span className="font-semibold">{bidderId}</span>
+          Bidder ID: <span className="font-semibold">{bidderId}</span>
         </span>
         <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
           {bidderId}@homefinder
@@ -107,18 +96,18 @@ export function UserMenu({ bidderId, balance }) {
         </li>
       </ul> */}
     </motion.div>
-  )
+  );
 }
 
 export default function Navbar({ bidderId, balance }) {
-  const [isOpen, setIsOpen] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <nav
       className={`backdrop-blur-sm border-gray-200 
       dark:bg-gray-900 bg-white/90 shadow-xl 
-    shadow-slate-400/20  px-4 fixed top-0 z-20 w-full py-2
+    shadow-stone-400/20  px-4 fixed top-0 z-20 w-full py-2
     `}
     >
       <motion.div
@@ -167,11 +156,7 @@ export default function Navbar({ bidderId, balance }) {
             aria-expanded="false"
           >
             <span className="sr-only">Open user menu</span>
-            <Avatar
-              size={30}
-              name={bidderId}
-              variant="beam"
-            />
+            <Avatar size={30} name={bidderId} variant="beam" />
           </button>
           <UserMenu balance={balance} bidderId={bidderId} />
           <motion.button
@@ -217,12 +202,12 @@ export default function Navbar({ bidderId, balance }) {
                     className={({ isActive }) =>
                       `${
                         isActive
-                          ? `bg-blue-700 text-white  hover:!bg-blue-800 md:hover:!bg-blue-300/20 
-                            md:text-blue-800 md:bg-blue-300/20`
+                          ? `bg-emerald-700 text-white  hover:!bg-emerald-800 md:hover:!bg-emerald-300/20 
+                            md:text-emerald-800 md:bg-emerald-300/20`
                           : ""
                       } 
                       block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-0 
-                      md:py-3 md:px-6 md:text-grey-700 hover:bg-blue-300/30
+                      md:py-3 md:px-6 md:text-grey-700 hover:bg-emerald-300/30
                       transition duration-[10] ease-out
 
                       `
@@ -237,5 +222,5 @@ export default function Navbar({ bidderId, balance }) {
         }
       </motion.div>
     </nav>
-  )
+  );
 }

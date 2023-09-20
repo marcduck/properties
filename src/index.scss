@@ -5,7 +5,7 @@
 @import "react-credit-cards-2/dist/lib/styles.scss";
 
 .arrowbutton {
-  @apply block px-3 py-2 ml-0 leading-tight text-slate-500 bg-white border border-slate-300  hover:bg-slate-100 hover:text-slate-700 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-400 dark:hover:bg-slate-700 dark:hover:text-white disabled:bg-gray-200 disabled:hover:text-slate-500;
+  @apply block px-3 py-2 ml-0 leading-tight text-stone-500 bg-white border border-stone-300  hover:bg-stone-100 hover:text-stone-700 dark:bg-stone-800 dark:border-stone-700 dark:text-stone-400 dark:hover:bg-stone-700 dark:hover:text-white disabled:bg-gray-200 disabled:hover:text-stone-500;
 }
 
 html {

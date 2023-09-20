@@ -90,10 +90,10 @@ export function Property({ post, bidderId, fullView = false }) {
         <div className="card-bottom p-4">
           <div className="flex items-center justify-between">
             <div className="flex flex-col">
-              <span className="text-lg font-bold text-slate-900 dark:text-white">
+              <span className="text-lg font-bold text-stone-900 dark:text-white">
                 {cents(post.price)}
               </span>
-              <div className="text-xs text-slate-500 flex gap-1">
+              <div className="text-xs text-stone-500 flex gap-1">
                 <div>
                   {!post.highestBidder ? (
                     <span className="inline-flex items-center gap-1">
@@ -122,7 +122,7 @@ export function Property({ post, bidderId, fullView = false }) {
                   {post.highestBidder ? (
                     <div>
                       Highest bidder:{" "}
-                      <span className="bg-slate-700/60 text-white tracking-widest text-xs py-0 px-1 inline-flex items-center rounded-md">
+                      <span className="bg-stone-700/60 text-white tracking-widest text-xs py-0 px-1 inline-flex items-center rounded-md">
                         {censorId(post.highestBidder)}
                       </span>
                     </div>
@@ -151,7 +151,7 @@ export function Property({ post, bidderId, fullView = false }) {
                     />
                   </svg>
                 </motion.button>
-                <span className="text-xs font-semibold text-slate-800">
+                <span className="text-xs font-semibold text-stone-800">
                   {likes}
                 </span>
               </div>
@@ -170,10 +170,10 @@ export function Property({ post, bidderId, fullView = false }) {
         whileHover={!isProcessing && { scale: 1.05 }}
         whileTap={!isProcessing && { scale: 0.95 }}
         onClick={() => onBidClick(post)}
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 
-              focus:outline-none focus:ring-blue-300 font-medium rounded-lg 
-              text-sm px-2 py-2.5 min-w-[19ch] text-center dark:bg-blue-600 
-              dark:hover:bg-blue-700 dark:focus:ring-blue-800 "
+        className="text-white bg-emerald-700 hover:bg-emerald-800 focus:ring-2 
+              focus:outline-none focus:ring-emerald-300 font-medium rounded-lg 
+              text-sm px-2 py-2.5 min-w-[19ch] text-center dark:bg-emerald-600 
+              dark:hover:bg-emerald-700 dark:focus:ring-emerald-800 "
       >
         {isProcessing ? (
           <div className="inline-flex items-center point">
