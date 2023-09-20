@@ -15,7 +15,7 @@ exports.handler = async (event) => {
 
   // Extract the _id from the request body
   // const _id = "01ebe080-a3ed-457a-81c4-62847f0eb1f8";
-  console.log(JSON.parse(event.body));
+  // console.log(JSON.parse(event.body));
   const { _id } = JSON.parse(event.body);
 
   // Construct a query to fetch the specific post based on _id

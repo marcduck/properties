@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { fetchData, fetchPostById } from "../utils";
 import { ArrowBack } from "@mui/icons-material";
 
-export default function PropertyDetail({ bidderId, balance }) {
+export default function PropertyDetail({ bidderId, balance, setBalance }) {
   let { id } = useParams();
   const [post, setPost] = useState(null);
 
@@ -15,13 +15,13 @@ export default function PropertyDetail({ bidderId, balance }) {
       .then((propertyPost) => {
         // Handle success
         setPost(propertyPost);
-        console.log("Post fetched successfully:", post);
+        // console.log("Post fetched successfully:", post);
       })
       .catch((error) => {
         // Handle error
         console.error("Error fetching post:", error);
       });
-  }, [id]);
+  }, [id, balance]);
 
   return (
     <div className="relative page-container flex flex-col items-center">

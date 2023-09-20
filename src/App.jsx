@@ -6,10 +6,11 @@ import FeaturedProperty from "./components/FeaturedProperty";
 import PropertiesPage from "./components/PropertiesPage";
 import Bank from "./components/Bank";
 import PropertyDetail from "./components/PropertyDetail";
-import Navbar, { Footer } from "./components/Navbar";
+import Navbar from "./components/Navbar";
 import Properties from "./components/Properties";
 import About from "./components/About";
 import { fetchData, generateBidderId, shuffle, useLocalStorage } from "./utils";
+import Footer from "./components/Footer";
 
 function App() {
   // App state
@@ -28,13 +29,10 @@ function App() {
   //   setUser(userData);
   // }, []);
 
-  const propertiesProps = {
+  const propertyProps = {
     bidderId,
-    // postData,
-    // setPost,
     balance,
-    // isLoading,
-    // filter,
+    setBalance,
   };
 
   return (
@@ -49,22 +47,28 @@ function App() {
             element={
               <>
                 <Hero />
-                <PropertiesPage {...propertiesProps} />
+                <PropertiesPage {...propertyProps} />
               </>
             }
           />
           <Route
             path="/properties"
-            element={<PropertiesPage {...propertiesProps} />}
+            element={<PropertiesPage {...propertyProps} />}
           />
           <Route
             path="/bank"
-            element={<Bank balance={balance} bidderId={bidderId} />}
+            element={
+              <Bank
+                balance={balance}
+                bidderId={bidderId}
+                setBalance={setBalance}
+              />
+            }
           />
           <Route path="/about" element={<About />} />
           <Route
             path="/properties/:id"
-            element={<PropertyDetail bidderId={bidderId} balance={balance} />}
+            element={<PropertyDetail {...propertyProps} />}
           />
         </Routes>
       </main>

@@ -14,7 +14,7 @@ exports.handler = async (event) => {
   const requestBody = JSON.parse(event.body);
 
   // Extract the values you need from the request body
-  const { _id, price, bidderId, bids } = requestBody;
+  const { _id, price, bidderId, balance, bids } = requestBody;
   const bidAmount = 1000;
 
   // Perform the Sanity patch operation

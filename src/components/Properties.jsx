@@ -60,7 +60,12 @@ function Properties({ bidderId, balance }) {
               {currentPosts.length &&
                 currentPosts.map((post, index) => (
                   <React.Fragment key={post._id}>
-                    <Property post={post} index={index} bidderId={bidderId} />
+                    <Property
+                      post={post}
+                      setPost={setPostData}
+                      index={index}
+                      bidderId={bidderId}
+                    />
                   </React.Fragment>
                 ))}
             </AnimatePresence>

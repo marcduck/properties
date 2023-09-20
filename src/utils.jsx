@@ -2,6 +2,25 @@ import { getImageDimensions } from "@sanity/asset-utils";
 import { useState } from "react";
 export const appName = "Homescape";
 
+export const links = [
+  {
+    name: "Home",
+    path: "/",
+  },
+  {
+    name: "Properties",
+    path: "/properties",
+  },
+  {
+    name: "Bank",
+    path: "/bank",
+  },
+  {
+    name: "About",
+    path: "/about",
+  },
+];
+
 export const randInt = (min = 0, max = 10) =>
   Math.floor(Math.random() * (max - min)) + min;
 
@@ -21,7 +40,7 @@ export async function fetchData(action, body = {}) {
     };
   }
   const url = import.meta.env.VITE_FUNCTIONS_URL + action;
-  console.log({ url, requestInfo });
+  // console.log({ url, requestInfo });
   const response = await fetch(url, requestInfo);
 
   if (!response.ok) {
@@ -32,7 +51,12 @@ export async function fetchData(action, body = {}) {
   return data;
 }
 
-export async function placeBid(post, bidderId = "aaa", action = "handleBid") {
+export async function placeBid(
+  post,
+  bidderId = "aaa",
+  balance,
+  action = "handleBid"
+) {
   try {
     const response = await fetch(import.meta.env.VITE_FUNCTIONS_URL + action, {
       method: "POST",
@@ -42,6 +66,7 @@ export async function placeBid(post, bidderId = "aaa", action = "handleBid") {
       body: JSON.stringify({
         ...post,
         bidderId: bidderId,
+        balance: balance,
       }),
     });
 

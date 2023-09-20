@@ -5,11 +5,17 @@ import {
   // useAnimation,
   useInView,
 } from "framer-motion";
-import { cents, censorId, randInt, placeBid } from "../utils";
+import { cents, censorId, randInt, placeBid, fetchPostById } from "../utils";
 import { Link } from "react-router-dom";
 import { handleLike } from "../functions/netlifyFunctions";
 
-export function Property({ post, bidderId, fullView = false }) {
+export function Property({
+  post,
+  setPost,
+  bidderId,
+  setBalance,
+  fullView = false,
+}) {
   const [likes, setLikes] = useState(post.likes || 0);
   const [bids, setBids] = useState(post.bidCount || 0);
   const [bidResponse, setBidResponse] = useState(null);

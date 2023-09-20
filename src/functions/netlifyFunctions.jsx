@@ -5,7 +5,7 @@ export function handleLike(postId, currentLikes) {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data.message);
+      // console.log(data.message);
       // Update your UI as needed
     })
     .catch((error) => {
