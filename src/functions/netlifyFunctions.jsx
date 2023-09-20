@@ -1,5 +1,5 @@
 export function handleLike(postId, currentLikes) {
-  fetch(`https://homefinderproperties.netlify.app/functions/handleLike`, {
+  fetch(`https://homescape.netlify.app/functions/handleLike`, {
     method: "POST",
     body: JSON.stringify({ postId, likes: currentLikes }),
   })

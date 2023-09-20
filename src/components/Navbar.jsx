@@ -37,7 +37,7 @@ export function Footer() {
         <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
           © {new Date().getFullYear()}{" "}
           <Link className="font-semibold hover:underline" to="/">
-            HomeFinder
+            Homescape
           </Link>
           . All Rights Reserved.
         </span>
@@ -76,7 +76,7 @@ export function UserMenu({ bidderId, balance }) {
           Bidder ID: <span className="font-semibold">{bidderId}</span>
         </span>
         <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-          {bidderId}@homefinder
+          {bidderId}@Homescape
         </span>
         <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
           Balance: {cents(balance)}

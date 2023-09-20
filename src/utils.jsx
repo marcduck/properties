@@ -1,6 +1,6 @@
 import { getImageDimensions } from "@sanity/asset-utils";
 import { useState } from "react";
-export const appName = "HomeFinder";
+export const appName = "Homescape";
 
 export const randInt = (min = 0, max = 10) =>
   Math.floor(Math.random() * (max - min)) + min;
