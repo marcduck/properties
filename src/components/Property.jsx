@@ -175,7 +175,7 @@ export function Property({
       <motion.button
         whileHover={!isProcessing && { scale: 1.05 }}
         whileTap={!isProcessing && { scale: 0.95 }}
-        onClick={() => onBidClick(post)}
+        onClick={() => onBidClick(post, bidderId)}
         className="text-white bg-emerald-700 hover:bg-emerald-800 focus:ring-2 
               focus:outline-none focus:ring-emerald-300 font-medium rounded-lg 
               text-sm px-2 py-2.5 min-w-[19ch] text-center dark:bg-emerald-600 
