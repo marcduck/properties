@@ -109,6 +109,7 @@ export default function Navbar({ bidderId, balance }) {
                 <li key={name}>
                   <NavLink
                     to={path}
+                    onClick={() => setMenuOpen(false)}
                     className={({ isActive }) =>
                       `${
                         isActive
