@@ -4,9 +4,9 @@ const CreditCard = ({ cardColor }) => {
   // Define an array of color classes from Tailwind CSS to apply to the card
   const cardColors = {
     default: "bg-gray-400",
-    blue: "bg-blue-500",
+    emerald: "bg-emerald-500",
     red: "bg-red-500",
-    green: "bg-green-500",
+    emerald: "bg-emerald-500",
     // Add more color options as needed
   };
 

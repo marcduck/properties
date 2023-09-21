@@ -6,11 +6,11 @@ import FeaturedProperty from "./components/FeaturedProperty";
 import PropertiesPage from "./components/PropertiesPage";
 import Bank from "./components/Bank";
 import PropertyDetail from "./components/PropertyDetail";
-import Navbar, { Footer } from "./components/Navbar";
+import Navbar from "./components/Navbar";
 import Properties from "./components/Properties";
 import About from "./components/About";
-import { generateBidderId, shuffle, useLocalStorage } from "./utils";
-import { client } from "./components/sanity";
+import { fetchData, generateBidderId, shuffle, useLocalStorage } from "./utils";
+import Footer from "./components/Footer";
 
 function App() {
   // App state
@@ -19,58 +19,20 @@ function App() {
     generateBidderId()
   );
   const [balance, setBalance] = useLocalStorage("balance", 10000);
-  const [isLoading, setIsLoading] = useState(true);
-  const [postData, setPost] = useState([]);
-  const [filter, setFilter] = useState(null);
 
   const [user, setUser] = useState(null);
 
-  // Fetch all properties from Sanity
-  useEffect(() => {
-    client
-      .fetch(
-        `*[_type == "gallery"] {
-            _id,
-            title,
-            image,
-            likes,
-            price,
-            highestBidder
-            }`
-      )
-      .then((data) => {
-        shuffle(data);
-        // console.log(data)
-        setIsLoading(false);
-        setPost(data);
-      })
-      .catch(console.error);
-  }, []);
-
   // Fetch user
-  useEffect(() => {
-    const userId = "your-user-id-here";
+  // useEffect(() => {
+  //   const userId = bidderId;
+  //   const userData = fetchData("fetchUser", userId);
+  //   setUser(userData);
+  // }, []);
 
-    client
-      .fetch(`*[_type == "user" && _id == $userId][0]`, {
-        userId,
-      })
-      .then((userData) => {
-        setUser(userData);
-        // console.log(user)
-      })
-      .catch((error) => {
-        console.error("Error fetching user:", error);
-      });
-  }, []);
-
-  const propertiesProps = {
+  const propertyProps = {
     bidderId,
-    postData,
-    setPost,
     balance,
-    isLoading,
-    filter,
+    setBalance,
   };
 
   return (
@@ -85,30 +47,28 @@ function App() {
             element={
               <>
                 <Hero />
-                <PropertiesPage {...propertiesProps} />
+                <PropertiesPage {...propertyProps} />
               </>
             }
           />
           <Route
             path="/properties"
-            element={<PropertiesPage {...propertiesProps} />}
+            element={<PropertiesPage {...propertyProps} />}
           />
           <Route
             path="/bank"
-            element={<Bank balance={balance} bidderId={bidderId} />}
+            element={
+              <Bank
+                balance={balance}
+                bidderId={bidderId}
+                setBalance={setBalance}
+              />
+            }
           />
           <Route path="/about" element={<About />} />
           <Route
             path="/properties/:id"
-            element={
-              <PropertyDetail
-                bidderId={bidderId}
-                postData={postData}
-                setPost={setPost}
-                balance={balance}
-                isLoading={isLoading}
-              />
-            }
+            element={<PropertyDetail {...propertyProps} />}
           />
         </Routes>
       </main>

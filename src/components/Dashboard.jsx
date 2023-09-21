@@ -14,7 +14,7 @@ function Dashboard({ balance, bidderId }) {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Balance card */}
-        <div className="bg-blue-300/30 p-10 rounded-lg">
+        <div className="bg-emerald-300/30 p-10 rounded-lg">
           <div className="text-sm">Current balance</div>
           <div className="text-2xl">{cents(balance)}</div>
         </div>
@@ -27,7 +27,7 @@ function Dashboard({ balance, bidderId }) {
             <button className="a"></button>
           </div>
         </div>
-        <div className="bg-slate-400 col-span-2 rounded-lg p-10"></div>
+        <div className="bg-stone-400 col-span-2 rounded-lg p-10"></div>
         <div className="flex">
           <ReactCreditCard />
         </div>

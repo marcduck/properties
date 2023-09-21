@@ -1,4 +1,4 @@
-import React, { memo } from "react"
+import React, { memo } from "react";
 
 function Pagination({
   totalPosts,
@@ -7,14 +7,10 @@ function Pagination({
   setCurrentPage,
   position = "",
 }) {
-  let pages = []
+  let pages = [];
 
-  for (
-    let i = 1;
-    i <= Math.ceil(totalPosts / pageSize);
-    i++
-  ) {
-    pages.push(i)
+  for (let i = 1; i <= Math.ceil(totalPosts / pageSize); i++) {
+    pages.push(i);
   }
   return (
     <ul
@@ -24,14 +20,14 @@ function Pagination({
               top: 0,
               behavior: "smooth",
             })
-          : null
+          : null;
       }}
       className="inline-flex items-center -space-x-px"
     >
       <button
         onClick={() => {
           if (currentPage > 1) {
-            setCurrentPage(currentPage - 1)
+            setCurrentPage(currentPage - 1);
           }
         }}
         disabled={1 == currentPage}
@@ -58,23 +54,21 @@ function Pagination({
           <button
             key={index}
             onClick={() => setCurrentPage(page)}
-            className={`px-3 py-2 leading-tight text-slate-500  border border-slate-300  hover:text-slate-700  dark:border-slate-700 dark:text-slate-400  dark:hover:text-white ${
+            className={`px-3 py-2 leading-tight text-stone-500  border border-stone-300  hover:text-stone-700  dark:border-stone-700 dark:text-stone-400  dark:hover:text-white ${
               page == currentPage
-                ? "bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-600"
-                : "bg-white hover:bg-slate-100 dark:hover:bg-slate-700"
+                ? "bg-stone-200 hover:bg-stone-300 dark:bg-stone-800 dark:hover:bg-stone-600"
+                : "bg-white hover:bg-stone-100 dark:hover:bg-stone-700"
             }`}
           >
             {page}
           </button>
-        )
+        );
       })}
 
       <button
         onClick={() => {
-          if (
-            currentPage < Math.ceil(totalPosts / pageSize)
-          ) {
-            setCurrentPage(currentPage + 1)
+          if (currentPage < Math.ceil(totalPosts / pageSize)) {
+            setCurrentPage(currentPage + 1);
           }
         }}
         className="arrowbutton rounded-r-lg"
@@ -96,7 +90,7 @@ function Pagination({
         </svg>
       </button>
     </ul>
-  )
+  );
 }
 
-export default Pagination
+export default Pagination;
