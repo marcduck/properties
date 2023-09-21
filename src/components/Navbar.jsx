@@ -60,11 +60,15 @@ export default function Navbar({ bidderId, balance }) {
             className="flex mr-3 text-sm bg-gray-800 relative rounded-full md:mr-0 
             focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
             aria-expanded="false"
+            onMouseEnter={() => setIsOpen(true)}
+            onMouseLeave={() => setIsOpen(false)}
           >
             <span className="sr-only">Open user menu</span>
             <Avatar size={30} name={bidderId} variant="beam" />
           </button>
-          <UserMenu balance={balance} bidderId={bidderId} />
+          <AnimatePresence>
+            {isOpen && <UserMenu balance={balance} bidderId={bidderId} />}
+          </AnimatePresence>
           <motion.button
             onClick={() => setMenuOpen(!menuOpen)}
             whileHover={{ scale: 1.05 }}
