@@ -53,7 +53,7 @@ export async function fetchData(action, body = {}) {
 
 export async function placeBid(
   post,
-  bidderId = "aaa",
+  bidderId = "000",
   balance,
   action = "handleBid"
 ) {

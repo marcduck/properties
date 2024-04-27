@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import Banner from "./components/Banner";
 import Hero from "./components/Hero";
-import FeaturedProperty from "./components/FeaturedProperty";
 import PropertiesPage from "./components/PropertiesPage";
 import Bank from "./components/Bank";
 import PropertyDetail from "./components/PropertyDetail";
 import Navbar from "./components/Navbar";
-import Properties from "./components/Properties";
 import About from "./components/About";
 import { fetchData, generateBidderId, shuffle, useLocalStorage } from "./utils";
 import Footer from "./components/Footer";
