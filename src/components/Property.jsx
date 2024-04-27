@@ -7,7 +7,7 @@ import {
 } from "framer-motion";
 import { cents, censorId, randInt, placeBid, fetchPostById } from "../utils";
 import { Link } from "react-router-dom";
-import { handleLike } from "../functions/netlifyFunctions";
+// import { handleLike } from "../functions/netlifyFunctions";
 
 export function Property({
   post,
@@ -141,7 +141,7 @@ export function Property({
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => handleLike(post, likes)}
+                  // onClick={() => handleLike(post, likes)}
                   className=""
                 >
                   <svg
