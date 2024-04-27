@@ -67,7 +67,7 @@ export function Property({
       className={`w-full h-min ${fullView ? "max-w-xl" : "max-w-md"} 
       bg-white border border-gray-200 
       rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 
-      mb-4 break-inside-avoid-column
+      mb-4 break-inside-avoid-column dark:text-gray-200
       
       `}
     >
@@ -99,7 +99,7 @@ export function Property({
               <span className="text-lg font-bold text-stone-900 dark:text-white">
                 {cents(post.price)}
               </span>
-              <div className="text-xs text-stone-500 flex gap-1">
+              <div className="text-xs text-stone-500 dark:text-gray-400 flex gap-1">
                 <div>
                   {!post.highestBidder ? (
                     <span className="inline-flex items-center gap-1">
@@ -157,7 +157,7 @@ export function Property({
                     />
                   </svg>
                 </motion.button>
-                <span className="text-xs font-semibold text-stone-800">
+                <span className="text-xs font-semibold text-stone-800 dark:text-gray-200">
                   {likes}
                 </span>
               </div>

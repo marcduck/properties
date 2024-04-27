@@ -9,7 +9,7 @@ export default function Footer() {
     <footer
       className={`${
         isBank && "ml-64"
-      }bg-white rounded-lg border-t m-4 dark:bg-gray-800`}
+      }bg-white dark:bg-gray-800 rounded-lg border-t dark:border-gray-400/20 mx-4`}
     >
       <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
         <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">

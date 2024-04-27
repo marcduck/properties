@@ -21,7 +21,7 @@ export default function Hero() {
           real-time.
         </p>
       </div>
-      <div className="bg-gradient-to-b -z-10 from-emerald-100 to-transparent dark:from-emerald-900 w-full h-full absolute top-0 left-0"></div>
+      <div className="bg-gradient-to-b -z-10 from-emerald-100 to-transparent dark:from-emerald-900 dark:to-gray-900 w-full h-full absolute top-0 left-0"></div>
     </section>
   );
 }

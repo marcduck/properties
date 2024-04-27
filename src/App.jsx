@@ -33,11 +33,11 @@ function App() {
   };
 
   return (
-    <div className="">
+    <div className="bg-white dark:bg-gray-900 pb-4">
       <div className="pb-4">
         <Navbar balance={balance} bidderId={bidderId} />
       </div>
-      <main className={`min-h-full mt-[3.5rem]`}>
+      <main className={`min-h-full mt-[3.5rem]  `}>
         <Routes>
           <Route
             path="/"

@@ -6,7 +6,7 @@ function Banner() {
     <div
       className="gap-2 flex flex-col
           py-8 md:py-16
-        bg-gradient-to-b from-emerald-100 "
+        bg-gradient-to-b from-emerald-100 dark:from-emerald-900 "
     >
       <div className="max-w-screen-xl mx-auto">
         <Link to="/" className="text-4xl">

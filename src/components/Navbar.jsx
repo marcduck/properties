@@ -12,8 +12,8 @@ export default function Navbar({ bidderId, balance }) {
   return (
     <nav
       className={`backdrop-blur-sm border-gray-200 
-      dark:bg-gray-900 bg-white/90 shadow-xl 
-    shadow-stone-400/20  px-4 fixed top-0 z-20 w-full py-2
+      dark:bg-gray-900 bg-white/90 dark:bg-gray-800/90 shadow-xl 
+    shadow-stone-400/20 dark:shadow-black/20  px-4 fixed top-0 z-20 w-full py-2
     `}
     >
       <motion.div
