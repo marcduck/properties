@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Property } from "./Property";
 import { Link, useParams } from "react-router-dom";
 import { fetchData, fetchPostById } from "../utils";
-import { ArrowBack } from "@mui/icons-material";
+import ArrowBack from "@mui/icons-material";
 
 export default function PropertyDetail({ bidderId, balance, setBalance }) {
   let { id } = useParams();
