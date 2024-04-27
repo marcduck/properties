@@ -1,6 +1,6 @@
 import { getImageDimensions } from "@sanity/asset-utils";
 import { useState } from "react";
-export const appName = "Homescape";
+export const appName = "Homefinder";
 
 export const links = [
   {

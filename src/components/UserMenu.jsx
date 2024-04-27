@@ -19,7 +19,7 @@ export default function UserMenu({ bidderId, balance }) {
           Bidder ID: <span className="font-semibold">{bidderId}</span>
         </span>
         <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-          {bidderId}@Homescape
+          {bidderId}@Homefinder
         </span>
         <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
           Balance: {cents(balance)}

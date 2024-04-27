@@ -15,7 +15,7 @@ export default function Footer() {
         <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
           © {new Date().getFullYear()}{" "}
           <Link className="font-semibold hover:underline" to="/">
-            Homescape
+            Homefinder
           </Link>
           . All Rights Reserved.
         </span>
