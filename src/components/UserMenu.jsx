@@ -8,10 +8,10 @@ export default function UserMenu({ bidderId, balance }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="z-20 my-4 text-base list-none bg-white
-                absolute flex flex-col items-center top-8 
+                absolute flex flex-col items-center top-6 
               divide-gray-100 rounded-lg shadow-lg
               dark:bg-gray-700 dark:divide-gray-600     
-              left-1/2 -translate-x-1/2         
+              left-1/2 transform -translate-x-1/2         
               "
       id="user-dropdown"
     >

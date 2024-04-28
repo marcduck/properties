@@ -56,20 +56,6 @@ export default function Navbar({ bidderId, balance }) {
         {/* User icon */}
         <div className="flex items-center md:order-2 group relative">
           <button
-            data-ripple-light="true"
-            data-tooltip-target="tooltip-bottom-start"
-            class="select-none rounded-lg bg-gray-900 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-noneactive:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-          >
-            Bottom Start
-          </button>
-          <div
-            data-tooltip="tooltip-bottom-start"
-            data-tooltip-placement="bottom-start"
-            class="absolute z-50 whitespace-normal break-words rounded-lg bg-black py-1.5 px-3 font-sans text-sm font-normal text-white focus:outline-none"
-          >
-            Material Tailwind
-          </div>
-          <button
             type="button"
             className="flex mr-3 text-sm bg-gray-800 relative rounded-full md:mr-0 
             focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
