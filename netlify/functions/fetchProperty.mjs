@@ -9,7 +9,7 @@ const sanity = createClient({
   apiVersion: `${new Date().toISOString().slice(0, 10)}`,
 });
 
-exports.handler = async (event) => {
+export default async (event) => {
   // Parse the incoming POST request body as JSON
   // const requestBody = JSON.parse(event.body);
 

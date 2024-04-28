@@ -8,8 +8,7 @@ const sanity = createClient({
   useCdn: false, // set to `true` to fetch from edge cache
   apiVersion: `${new Date().toISOString().slice(0, 10)}`, // use current date (YYYY-MM-DD) to target the latest API version
 });
-
-exports.handler = async () => {
+export default async () => {
   const query = `*[_type == "gallery"] {
                 _id,
                 title,
