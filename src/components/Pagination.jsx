@@ -56,8 +56,8 @@ function Pagination({
             onClick={() => setCurrentPage(page)}
             className={`px-3 py-2 leading-tight text-stone-500  border border-stone-300  hover:text-stone-700  dark:border-stone-700 dark:text-stone-400  dark:hover:text-white ${
               page == currentPage
-                ? "bg-stone-200 hover:bg-stone-300 dark:bg-stone-800 dark:hover:bg-stone-600"
-                : "bg-white hover:bg-stone-100 dark:hover:bg-stone-700"
+                ? "bg-stone-200  hover:bg-stone-300 dark:bg-stone-800 dark:hover:bg-stone-600"
+                : "bg-white dark:bg-stone-800 hover:bg-stone-100 dark:hover:bg-stone-700"
             }`}
           >
             {page}

@@ -4,13 +4,14 @@ import { AnimatePresence, motion } from "framer-motion";
 export default function UserMenu({ bidderId, balance }) {
   return (
     <motion.div
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: 20 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       className="z-20 my-4 text-base list-none bg-white
-                absolute left-12 flex flex-col items-center top-12 
+                absolute flex flex-col items-center top-8 
               divide-gray-100 rounded-lg shadow-lg
-              dark:bg-gray-700 dark:divide-gray-600              
+              dark:bg-gray-700 dark:divide-gray-600     
+              left-1/2 -translate-x-1/2         
               "
       id="user-dropdown"
     >
