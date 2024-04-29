@@ -38,10 +38,26 @@ export default defineType({
       type: 'string',
       title: 'Highest Bidder',
     }),
+    // Add a field for a list of tags
+    defineField({
+      name: 'tags',
+      type: 'array',
+      title: 'Tags',
+      of: [{type: 'string'}],
+    }),
+    // Add a field for date created
+    defineField({
+      name: 'createdAt',
+      type: 'datetime',
+      title: 'Created At',
+      readOnly: true,
+    }),
   ],
   initialValue: {
     likes: 0,
     bidCount: 0,
     price: 1000,
+    createdAt: new Date().toISOString(),
+    tags: [],
   },
 })
