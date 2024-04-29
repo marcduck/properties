@@ -8,8 +8,18 @@ const sanity = createClient({
   useCdn: false, // set to `true` to fetch from edge cache
   apiVersion: `${new Date().toISOString().slice(0, 10)}`, // use current date (YYYY-MM-DD) to target the latest API version
 });
-export default async () => {
-  const query = `*[_type == "gallery"] {
+export default async (req, context) => {
+  const {
+    page = 1,
+    itemsPerPage = 10,
+    sortBy = "createdAt",
+    order = "desc",
+  } = context.params;
+
+  const start = (page - 1) * itemsPerPage;
+  const end = page * itemsPerPage;
+
+  const query = `*[_type == "gallery"] | order(${sortBy} ${order}) [${start}...${end}] {
                 _id,
                 title,
                 image,
@@ -17,6 +27,9 @@ export default async () => {
                 price,
                 highestBidder
                 }`;
+
+  const countQuery = `count(*[_type == "gallery"])`;
+
   const properties = await sanity
     .fetch(query)
     .then((data) => {
@@ -37,15 +50,7 @@ export default async () => {
     })
     .catch(console.error);
 
-  return {
-    statusCode: 200,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers": "Content-Type",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
-      // ^ Cors stuff
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(properties),
-  };
+  const totalPosts = await sanity.fetch(countQuery);
+
+  return new Response(JSON.stringify({ properties, totalPosts }));
 };

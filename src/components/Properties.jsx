@@ -8,14 +8,21 @@ function Properties({ bidderId, balance }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(15);
   const [postData, setPostData] = useState([]);
+  const [totalPosts, setTotalPosts] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchData("fetchProperties").then((data) => {
-      setPostData(data);
+    fetchData("fetchProperties", {
+      sortBy: "price",
+      order: "asc",
+      page: currentPage,
+      itemsPerPage: pageSize,
+    }).then((data) => {
+      setPostData(data.properties);
+      setTotalPosts(data.totalPosts);
       setIsLoading(false);
     });
-  }, []);
+  }, [currentPage, pageSize]); // Add currentPage and pageSize to the dependency array
 
   const Skeleton = ({ i }) => {
     return (
@@ -28,10 +35,6 @@ function Properties({ bidderId, balance }) {
     );
   };
 
-  const lastPostIndex = currentPage * pageSize;
-  const firstPostIndex = lastPostIndex - pageSize;
-  const currentPosts = postData.slice(firstPostIndex, lastPostIndex);
-
   return (
     <main className="">
       {/* <Banner /> */}
@@ -39,7 +42,7 @@ function Properties({ bidderId, balance }) {
         <div className="flex flex-col gap-8 items-center justify-center">
           {postData && (
             <Pagination
-              totalPosts={postData.length || 3 * pageSize}
+              totalPosts={totalPosts}
               pageSize={pageSize}
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
@@ -57,8 +60,8 @@ function Properties({ bidderId, balance }) {
                   ))}
                 </>
               )} */}
-              {currentPosts.length &&
-                currentPosts.map((post, index) => (
+              {postData.length &&
+                postData.map((post, index) => (
                   <React.Fragment key={post._id}>
                     <Property
                       post={post}
@@ -72,7 +75,7 @@ function Properties({ bidderId, balance }) {
           </div>
           {postData && (
             <Pagination
-              totalPosts={postData.length || 3 * pageSize}
+              totalPosts={totalPosts}
               pageSize={pageSize}
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}

@@ -14,9 +14,8 @@ export default async (event) => {
   // const requestBody = JSON.parse(event.body);
 
   // Extract the _id from the request body
-  // const _id = "01ebe080-a3ed-457a-81c4-62847f0eb1f8";
   // console.log(JSON.parse(event.body));
-  const { _id } = JSON.parse(event.body);
+  const { _id = "01ebe080-a3ed-457a-81c4-62847f0eb1f8" } = event.body;
 
   // Construct a query to fetch the specific post based on _id
   const query = `*[_type == "gallery" && _id == $postId] {
@@ -39,14 +38,5 @@ export default async (event) => {
     };
   });
 
-  return {
-    statusCode: 200,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers": "Content-Type",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(properties),
-  };
+  return new Response(JSON.stringify(properties));
 };
