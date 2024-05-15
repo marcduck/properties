@@ -1,12 +1,18 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react"
 
 import {
   motion,
   // useAnimation,
   useInView,
-} from "framer-motion";
-import { cents, censorId, randInt, placeBid, fetchPostById } from "../utils";
-import { Link } from "react-router-dom";
+} from "framer-motion"
+import {
+  cents,
+  censorId,
+  randInt,
+  placeBid,
+  fetchPostById,
+} from "../utils"
+import { Link } from "react-router-dom"
 // import { handleLike } from "../functions/netlifyFunctions";
 
 export function Property({
@@ -16,40 +22,42 @@ export function Property({
   setBalance,
   fullView = false,
 }) {
-  const [likes, setLikes] = useState(post.likes || 0);
-  const [bids, setBids] = useState(post.bidCount || 0);
-  const [bidResponse, setBidResponse] = useState(null);
+  const [likes, setLikes] = useState(post.likes || 0)
+  const [bids, setBids] = useState(post.bidCount || 0)
+  const [bidResponse, setBidResponse] = useState(null)
 
-  const [isProcessing, setIsProcessing] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false)
 
   if (post.price === null) {
-    post.price = 0;
+    post.price = 0
   }
 
-  const ref = useRef(null);
-  const isInView = useInView(ref);
+  const ref = useRef(null)
+  const isInView = useInView(ref)
 
   const pluralize = (count, noun = "bids", suffix = "s") =>
-    `${count ? count : 0} ${noun}${count !== 1 ? suffix : ""}`;
+    `${count ? count : 0} ${noun}${
+      count !== 1 ? suffix : ""
+    }`
 
   const onBidClick = (post, bidderId) => {
     if (isProcessing) {
-      return;
+      return
     }
-    setIsProcessing(true);
+    setIsProcessing(true)
 
     placeBid(post, bidderId)
       .then((data) => {
-        console.log("Bid placed successfully:", data);
-        setBidResponse("Bid placed!");
-        setIsProcessing(false);
+        console.log("Bid placed successfully:", data)
+        setBidResponse("Bid placed!")
+        setIsProcessing(false)
       })
       .catch((error) => {
-        console.error("Error placing bid:", error);
-        setBidResponse("Bid failed! Try again");
-        setIsProcessing(false);
-      });
-  };
+        console.error("Error placing bid:", error)
+        setBidResponse("Bid failed! Try again")
+        setIsProcessing(false)
+      })
+  }
 
   // Property card
   return (
@@ -57,17 +65,23 @@ export function Property({
       ref={ref}
       id={post._id}
       initial={{ opacity: 0 }}
-      animate={isInView ? { opacity: 1 } : { opacity: 0, x: randInt(-50, 50) }}
+      animate={
+        isInView
+          ? { opacity: 1 }
+          : { opacity: 0, x: randInt(-50, 50) }
+      }
       transition={{
         duration: 0.6,
         type: "spring",
         damping: randInt(10, 20),
       }}
       exit={{ opacity: 0 }}
-      className={`w-full h-min ${fullView ? "max-w-xl" : "max-w-md"} 
+      className={`w-full h-min ${
+        fullView ? "max-w-xl" : "max-w-md"
+      } 
       bg-white border border-gray-200 
       rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 
-      mb-4 break-inside-avoid-column dark:text-gray-200
+       break-inside-avoid-column dark:text-gray-200
       
       `}
     >
@@ -75,7 +89,7 @@ export function Property({
         <Link to={`/properties/${post._id}`}>
           {(
             <img
-              className="w-full rounded-t-lg object-cover "
+              className="w-full rounded-t-lg object-cover aspect-[1.412]"
               src={post.propertyImage}
               alt="product image"
             />
@@ -168,7 +182,7 @@ export function Property({
         </div>
       </>
     </motion.div>
-  );
+  )
 
   function SpinnerButton(text = "bid") {
     return (
@@ -208,6 +222,6 @@ export function Property({
           bidResponse
         )}
       </motion.button>
-    );
+    )
   }
 }

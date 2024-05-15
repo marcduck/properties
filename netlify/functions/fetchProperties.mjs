@@ -1,39 +1,44 @@
-import { createClient } from "@sanity/client";
-import imageUrlBuilder from "@sanity/image-url";
+import { createClient } from "@sanity/client"
+import imageUrlBuilder from "@sanity/image-url"
 
 const sanity = createClient({
   projectId: "1emj1fo4",
   dataset: "production",
   token: process.env.VITE_SANITY_API_KEY,
-  useCdn: false, // set to `true` to fetch from edge cache
-  apiVersion: `${new Date().toISOString().slice(0, 10)}`, // use current date (YYYY-MM-DD) to target the latest API version
-});
-export default async (req, context) => {
-  const {
-    page = 1,
-    itemsPerPage = 10,
-    sortBy = "createdAt",
-    order = "desc",
-  } = context.params;
+  useCdn: false,
+  apiVersion: `${new Date().toISOString().slice(0, 10)}`,
+})
 
-  const start = (page - 1) * itemsPerPage;
-  const end = page * itemsPerPage;
+export default async (event, context) => {
+  // Now you have the bodyData object, use it as needed!
+  // console.log("event:", event)
 
-  const query = `*[_type == "gallery"] | order(${sortBy} ${order}) [${start}...${end}] {
+  const { itemsPerPage = 10, lastId } = context.params
+  let queryFilter = ""
+
+  if (lastId) {
+    queryFilter = `*[_type == "gallery" && _id > ${lastId}] | order(_id desc)[0..${itemsPerPage}]`
+  } else {
+    queryFilter = `*[_type == "gallery"] | order(_id desc)[0..${itemsPerPage}]`
+  }
+
+  const query =
+    queryFilter +
+    ` {
                 _id,
                 title,
                 image,
                 likes,
                 price,
                 highestBidder
-                }`;
+                }`
 
-  const countQuery = `count(*[_type == "gallery"])`;
+  const countQuery = `count(*[_type == "gallery"])`
 
   const properties = await sanity
     .fetch(query)
     .then((data) => {
-      const builder = imageUrlBuilder(sanity);
+      const builder = imageUrlBuilder(sanity)
 
       const output = data.map((property) => {
         return {
@@ -44,13 +49,15 @@ export default async (req, context) => {
             .fit("max")
             .auto("format")
             .url(),
-        };
-      });
-      return output;
+        }
+      })
+      return output
     })
-    .catch(console.error);
+    .catch(console.error)
 
-  const totalPosts = await sanity.fetch(countQuery);
+  const totalPosts = await sanity.fetch(countQuery)
 
-  return new Response(JSON.stringify({ properties, totalPosts }));
-};
+  return new Response(
+    JSON.stringify({ properties, totalPosts })
+  )
+}

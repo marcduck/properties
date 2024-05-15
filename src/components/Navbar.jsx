@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
-import { appName, cents, links } from "../utils";
-import Avatar from "boring-avatars";
-import { AnimatePresence, motion } from "framer-motion";
-import UserMenu from "./UserMenu";
+import React, { useEffect, useState } from "react"
+import {
+  Link,
+  NavLink,
+  useLocation,
+} from "react-router-dom"
+import { appName, cents, links } from "../utils"
+import Avatar from "boring-avatars"
+import { AnimatePresence, motion } from "framer-motion"
+import UserMenu from "./UserMenu"
 
 export default function Navbar({ bidderId, balance }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   return (
     <nav
@@ -64,10 +68,19 @@ export default function Navbar({ bidderId, balance }) {
             onMouseLeave={() => setIsOpen(false)}
           >
             <span className="sr-only">Open user menu</span>
-            <Avatar size={30} name={bidderId} variant="beam" />
+            <Avatar
+              size={30}
+              name={bidderId}
+              variant="beam"
+            />
           </button>
           <AnimatePresence>
-            {isOpen && <UserMenu balance={balance} bidderId={bidderId} />}
+            {isOpen && (
+              <UserMenu
+                balance={balance}
+                bidderId={bidderId}
+              />
+            )}
           </AnimatePresence>
           <motion.button
             onClick={() => setMenuOpen(!menuOpen)}
@@ -114,7 +127,7 @@ export default function Navbar({ bidderId, balance }) {
                       `${
                         isActive
                           ? `bg-emerald-700 text-white  hover:!bg-emerald-800 md:hover:!bg-emerald-300/20 
-                            md:text-emerald-800 md:bg-emerald-300/20`
+                            md:text-emerald-800 md:bg-emerald-300/20 dark:md:text-emerald-500/80`
                           : ""
                       } 
                       block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-0 
@@ -133,5 +146,5 @@ export default function Navbar({ bidderId, balance }) {
         }
       </motion.div>
     </nav>
-  );
+  )
 }
