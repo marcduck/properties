@@ -53,9 +53,9 @@ function Properties({ bidderId, balance }) {
               Displaying {pageSize} results - page {1} of{" "}
               {Math.ceil(totalPosts / pageSize)}
             </div>
-            <div className="text-gray-500">
+            {/* <div className="text-gray-500">
               lastId: {lastId}
-            </div>
+            </div> */}
           </div>
           <div className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 overflow-x-hidden grid-rows-[masonry]">
             <AnimatePresence
