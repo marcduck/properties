@@ -11,17 +11,20 @@ const sanity = createClient({
 
 export default async (event, context) => {
   // Now you have the bodyData object, use it as needed!
-  // console.log("event:", event)
+  // Destructure the query params from the URL
+  const params = new URL(event.url).searchParams
 
-  const { itemsPerPage = 10, lastId } = context.params
+  const { itemsPerPage = 10, lastId } =
+    Object.fromEntries(params)
   let queryFilter = ""
 
   if (lastId) {
-    queryFilter = `*[_type == "gallery" && _id > ${lastId}] | order(_id desc)[0..${itemsPerPage}]`
+    queryFilter = `*[_type == "gallery" && _id > "${lastId}"] | order(_id desc)[0..${itemsPerPage}]`
   } else {
     queryFilter = `*[_type == "gallery"] | order(_id desc)[0..${itemsPerPage}]`
   }
 
+  console.log(queryFilter)
   const query =
     queryFilter +
     ` {

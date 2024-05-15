@@ -15,7 +15,7 @@ function Properties({ bidderId, balance }) {
   function handleFetch(lastId, mode = "replace") {
     fetchData("fetchProperties", {
       itemsPerPage: pageSize,
-      lastId: lastId,
+      lastId: lastId ? lastId : "",
     }).then((data) => {
       // If mode is append, add to postData, otherwise replace postData
       if (mode === "append") {

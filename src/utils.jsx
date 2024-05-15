@@ -29,21 +29,24 @@ export function censorId(id = "000") {
 }
 
 export async function fetchData(action, body = {}) {
-  const url = `${
-    import.meta.env.VITE_FUNCTIONS_URL
-  }${action}`
+  let url = new URL(
+    `${import.meta.env.VITE_FUNCTIONS_URL}${action}`
+  )
+
+  if (Object.keys(body).length > 0) {
+    // Append body properties as query parameters
+    Object.entries(body).forEach(([key, value]) => {
+      url.searchParams.append(key, value)
+    })
+  }
+  console.log(url)
+
   const requestInfo = {
     method: "GET",
     headers: {},
   }
 
-  if (Object.keys(body).length > 0) {
-    requestInfo.method = "POST"
-    requestInfo.headers["Content-Type"] = "application/json"
-    requestInfo.body = JSON.stringify(body)
-  }
-
-  const response = await fetch(url, requestInfo)
+  const response = await fetch(url.toString(), requestInfo)
 
   if (!response.ok) {
     throw new Error(
