@@ -19,9 +19,9 @@ export default async (event, context) => {
   let queryFilter = ""
 
   if (lastId) {
-    queryFilter = `*[_type == "gallery" && _id > "${lastId}"] | order(_id desc)[0..${itemsPerPage}]`
+    queryFilter = `*[_type == "gallery" && _id > "${lastId}"] | order(_id)[0..${itemsPerPage}]`
   } else {
-    queryFilter = `*[_type == "gallery"] | order(_id desc)[0..${itemsPerPage}]`
+    queryFilter = `*[_type == "gallery"] | order(_id)[0..${itemsPerPage}]`
   }
 
   console.log(queryFilter)
