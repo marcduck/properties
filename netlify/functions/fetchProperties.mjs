@@ -14,21 +14,27 @@ export default async (event, context) => {
   // Destructure the query params from the URL
   const params = new URL(event.url).searchParams
 
-  const { itemsPerPage = 10, lastId } =
-    Object.fromEntries(params)
+  const {
+    itemsPerPage,
+    lastId,
+    order = "desc",
+    sortBy = "_id",
+  } = Object.fromEntries(params)
   let queryFilter = ""
 
   if (lastId) {
-    queryFilter = `*[_type == "gallery" && _id > "${lastId}"] | order(_id)[0..${itemsPerPage}]`
+    queryFilter = `*[_type == "gallery" && ${sortBy} ${
+      order === "desc" ? "<" : ">"
+    } "${lastId}"] | order(${sortBy} ${order})[0..${itemsPerPage}]`
   } else {
-    queryFilter = `*[_type == "gallery"] | order(_id)[0..${itemsPerPage}]`
+    queryFilter = `*[_type == "gallery"] | order(${sortBy} ${order})[0..${itemsPerPage}]`
   }
 
-  console.log(queryFilter)
   const query =
     queryFilter +
     ` {
                 _id,
+                _createdAt,
                 title,
                 image,
                 likes,

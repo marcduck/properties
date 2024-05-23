@@ -13,7 +13,10 @@ import {
   fetchPostById,
 } from "../utils"
 import { Link } from "react-router-dom"
+import ConditionalLink from "./ConditionalLink"
 // import { handleLike } from "../functions/netlifyFunctions";
+
+import { Modal, Button } from "flowbite-react"
 
 export function Property({
   post,
@@ -25,6 +28,7 @@ export function Property({
   const [likes, setLikes] = useState(post.likes || 0)
   const [bids, setBids] = useState(post.bidCount || 0)
   const [bidResponse, setBidResponse] = useState(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const [isProcessing, setIsProcessing] = useState(false)
 
@@ -86,14 +90,20 @@ export function Property({
       `}
     >
       <>
-        <Link to={`/properties/${post._id}`}>
-          {(
+        <ConditionalLink
+          condition={!fullView}
+          to={`/property/${post._id}`}
+        >
+          {post.propertyImage ? (
             <img
-              className="w-full rounded-t-lg object-cover aspect-[1.412]"
+              className={`w-full rounded-t-lg object-cover ${
+                fullView ? "" : "aspect-[1.412]"
+              }`}
               src={post.propertyImage}
               alt="product image"
+              loading="lazy"
             />
-          ) || (
+          ) : (
             <div className="flex items-center justify-center w-full h-48 bg-gray-300 rounded sm:w-96 dark:bg-gray-700">
               <svg
                 className="w-12 h-12 text-gray-200"
@@ -106,7 +116,7 @@ export function Property({
               </svg>
             </div>
           )}
-        </Link>
+        </ConditionalLink>
         <div className="card-bottom p-4">
           <div className="flex items-center justify-between">
             <div className="flex flex-col">

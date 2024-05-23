@@ -7,10 +7,10 @@ export const links = [
     name: "Home",
     path: "/",
   },
-  {
-    name: "Properties",
-    path: "/properties",
-  },
+  // {
+  //   name: "Properties",
+  //   path: "/properties",
+  // },
   {
     name: "Bank",
     path: "/bank",
@@ -39,7 +39,6 @@ export async function fetchData(action, body = {}) {
       url.searchParams.append(key, value)
     })
   }
-  console.log(url)
 
   const requestInfo = {
     method: "GET",
@@ -129,7 +128,6 @@ export const useLocalStorage = (key, initialValue) => {
   const [storedValue, setStoredValue] = useState(() => {
     try {
       const item = window.localStorage.getItem(key)
-      // console.log({ item })
       return item ? JSON.parse(item) : initialValue
     } catch (err) {
       console.error(err)

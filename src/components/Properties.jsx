@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import { fetchData } from "../utils"
 
 function Properties({ bidderId, balance }) {
-  const [pageSize, setPageSize] = useState(15)
+  const [pageSize, setPageSize] = useState(8) // images per page
   const [postData, setPostData] = useState([])
   const [totalPosts, setTotalPosts] = useState(0)
   const [isLoading, setIsLoading] = useState(true)

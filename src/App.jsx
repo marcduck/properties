@@ -1,23 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
-import Hero from "./components/Hero";
-import PropertiesPage from "./components/PropertiesPage";
-import Bank from "./components/Bank";
-import PropertyDetail from "./components/PropertyDetail";
-import Navbar from "./components/Navbar";
-import About from "./components/About";
-import { fetchData, generateBidderId, shuffle, useLocalStorage } from "./utils";
-import Footer from "./components/Footer";
+import React, { useEffect, useState } from "react"
+import { Routes, Route } from "react-router-dom"
+import Hero from "./components/Hero"
+import PropertiesPage from "./components/PropertiesPage"
+import Bank from "./components/Bank"
+import PropertyDetail from "./components/PropertyDetail"
+import Navbar from "./components/Navbar"
+import About from "./components/About"
+import {
+  fetchData,
+  generateBidderId,
+  shuffle,
+  useLocalStorage,
+} from "./utils"
+import Footer from "./components/Footer"
 
 function App() {
   // App state
   const [bidderId, setBidderId] = useLocalStorage(
     "bidderId",
     generateBidderId()
-  );
-  const [balance, setBalance] = useLocalStorage("balance", 10000);
+  )
+  const [balance, setBalance] = useLocalStorage(
+    "balance",
+    10000
+  )
 
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null)
 
   // Fetch user
   // useEffect(() => {
@@ -30,28 +38,27 @@ function App() {
     bidderId,
     balance,
     setBalance,
-  };
+  }
 
   return (
     <div className="bg-white dark:bg-gray-900 pb-4 text-gray-900 dark:text-gray-50 min-h-screen">
       <div className="pb-4">
         <Navbar balance={balance} bidderId={bidderId} />
       </div>
-      <main className={`mt-[3.5rem] mb-auto `}>
+      <main className={`mt-[3.5rem] mb-auto h-full `}>
         <Routes>
           <Route
             path="/"
             element={
               <>
-                <Hero />
                 <PropertiesPage {...propertyProps} />
               </>
             }
           />
-          <Route
+          {/* <Route
             path="/properties"
             element={<PropertiesPage {...propertyProps} />}
-          />
+          /> */}
           <Route
             path="/bank"
             element={
@@ -64,14 +71,14 @@ function App() {
           />
           <Route path="/about" element={<About />} />
           <Route
-            path="/properties/:id"
+            path="/property/:id"
             element={<PropertyDetail {...propertyProps} />}
           />
         </Routes>
       </main>
       <Footer />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
